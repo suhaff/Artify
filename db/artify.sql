@@ -21,12 +21,8 @@ CREATE TABLE IF NOT EXISTS ARTWORKS(
     STOCK INT(8) NOT NULL,
     CATEGORY_ID INT(11) NOT NULL,
     FOREIGN KEY (CATEOGRY_ID) REFERENCES CATEGORY(CATEGORY_ID) 
-
 );
--- Sample records for artworks table
-DELETE FROM ARTWORKS;
-INSERT INTO ARTWORKS VALUES(1, "NAME", "DIMENSIONS", "DESC", 200, "A_NAME", "URL", 8, 100);
-INSERT INTO ARTWORKS VALUES(1, "Lisa Mona", "20X30 (inches)", "A painting of a beautiful woman from the 90s", 200.00, "Leonardo Da Vinci", "\images\painting_1.jpg" , 1000, 100);
+
 
 
 -- CART TABLE
