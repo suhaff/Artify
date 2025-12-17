@@ -17,12 +17,12 @@ Developed by: **Team Artify**
 
 The system allows users to:
 
-✔ Browse artworks  
-✔ Add artworks to the cart  
-✔ Proceed to checkout  
-✔ Place an order  
-✔ Store order details in the database  
-✔ Allow admin to manage categories and artworks  
+Browse artworks  
+--> Add artworks to the cart  
+--> Proceed to checkout  
+--> Place an order  
+--> Store order details in the database  
+--> Allow admin to manage categories and artworks  
 
 ---
 
