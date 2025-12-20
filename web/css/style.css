@@ -47,35 +47,36 @@ nav {
 nav a {
       color: black;
       text-decoration: none;
-      margin-left: 30px;
+      margin-left: 10px;
       font-family: Abril Fatface;
-      transition: transform 0.3s ease;
+      transition: transform 0.15s ease;
       display: inline-block;
     }
 
     nav a:hover {
-      transform: scale(1.15);
-       color: var(--primary-color);
+        transform: scale(1.15);
+        color: var(--primary-color);
     }
 
 /*  */    
 .hero {
-      text-align: center;
-      padding: 100px 20px;
-      background-color: #f9efe6;
-    }
+    text-align: center;
+    padding: 100px 20px;
+    background-color: #f9efe6;
+}
 
-    .hero h5 {
+.hero h5 {
     font-family: Montserrat; 
     font-weight: 300; 
     font-size:larger;
     color: var(--text-dark);
-    }
+}
 
 .welcome-text {
     letter-spacing: 5px;
     font-weight: 300;
     margin-bottom: -20px; 
+    margin-top: -80px;
     color: #444;
 }
 
@@ -83,23 +84,29 @@ nav a {
     display: flex;
     align-items: center; 
     justify-content: center;
-    font-size: 15rem;
+    font-size: 17rem;
+    font-weight: 500;
     font-family: 'Monsieur La Doulaise', cursive;
     color: #000;
     margin: 20px 0;
 }
 
 .hero2 span {
-    font-size: 4.5rem; 
-    font-family: 'Playfair Display', serif; 
-    letter-spacing: 12px; 
-    margin-left: -35px; 
-    font-weight: 400;
+    font-size: 5rem;          
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0rem;  
+    margin-left: -60px;
+    margin-top: -40px;     
+    font-weight: 300;        
+    text-transform: uppercase; 
+
 }
 
 .hero-description {
+    font-size: smaller;
     max-width: 600px;
     margin: 0 auto;
+    margin-top: -80px;
     line-height: 1.6;
     letter-spacing: 1px;
     color: #333;
@@ -107,12 +114,13 @@ nav a {
 
 .cta-button {
     display: inline-block;
-    margin-top: 30px;
+    margin-top: 15px;
     padding: 10px 25px;
     border-bottom: 1px solid #000; 
     color: #000;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
+    font-weight: bold;
     letter-spacing: 2px;
     transition: all 0.3s ease;
 }
@@ -120,6 +128,24 @@ nav a {
 .cta-button:hover {
     letter-spacing: 4px;
     opacity: 0.7;
+}
+
+.footer-text{
+    font-size: x-small;
+    font-weight: bold;
+    font-family: cinzel;
+    margin-top: -10px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+    color: var(--text-dark);
+}
+
+.header-line {
+    border: 0;
+    height: 1px;
+    background: black; 
+    width: 90%;       
+    margin: 20px auto; 
 }
 
 /* Main Content */
@@ -162,11 +188,11 @@ button:hover, .btn:hover {
 
 /* Footer */
 footer {
-    background-color: var(--text-dark);
+    background-color: var(--bg-beige);
     color: white;
     text-align: center;
     padding: 2rem;
-    margin-top: 3rem;
+    margin-top: -5rem;
 }
 
 /* Responsive Design */
