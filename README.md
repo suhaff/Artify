@@ -185,6 +185,4 @@ http://localhost:8080/Artify/index.html
 
 ---
 
-## License
-This project is for educational use under CAT201 (USM).
 
