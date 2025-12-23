@@ -19,7 +19,7 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     color: var(--text-dark);
-    background-color: var(--bg-light);
+    background-color: var(--bg-beige);
     line-height: 1.6;
 }
 
@@ -76,7 +76,7 @@ nav a {
     letter-spacing: 5px;
     font-weight: 300;
     margin-bottom: -20px; 
-    margin-top: -80px;
+    margin-top: -100px;
     color: #444;
 }
 
@@ -126,11 +126,14 @@ nav a {
 }
 
 .cta-button:hover {
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
     letter-spacing: 4px;
     opacity: 0.7;
 }
 
 .footer-text{
+    margin-bottom: auto;
     font-size: x-small;
     font-weight: bold;
     font-family: cinzel;
@@ -206,3 +209,81 @@ footer {
     }
 }
 
+/* About Page Specific Layout */
+.about-page {
+    background-color:white;
+    padding-bottom: 80px;
+}
+
+
+.about-hero {
+    display: flex;
+    align-items: center;
+    min-height: 80vh;
+    padding: 0 5%;
+    gap: 50px;
+}
+
+.hero-image-container {
+    flex: 1;
+    height: 100px;
+    overflow: hidden;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-text-container {
+    flex: 1;
+    text-align: left;
+    background-color: #ffffff; 
+    width: 80%;              
+    max-width: 1000px;        
+    margin:5px auto;       
+    padding: 60px;
+}
+
+
+.about-content {
+    max-width: 900px;
+    margin: auto 0;
+    padding: 20px;
+}
+
+.story-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 30px;
+    font-family: 'Abhaya Libre', serif;
+}
+
+.drop-cap {
+    float: left;
+    font-family: 'Monsieur La Doulaise', cursive;
+    font-size: 6rem;
+    line-height: 0.8;
+    padding-right: 15px;
+    color: #000;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.email-link {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+}
