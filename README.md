@@ -17,12 +17,12 @@ Developed by: **Team Artify**
 
 The system allows users to:
 
-✔ Browse artworks  
-✔ Add artworks to the cart  
-✔ Proceed to checkout  
-✔ Place an order  
-✔ Store order details in the database  
-✔ Allow admin to manage categories and artworks  
+Browse artworks  
+--> Add artworks to the cart  
+--> Proceed to checkout  
+--> Place an order  
+--> Store order details in the database  
+--> Allow admin to manage categories and artworks  
 
 ---
 
@@ -106,13 +106,13 @@ Artify/
 
 ## Backend Modules
 
-### ✔ DatabaseHandler.java  
+### DatabaseHandler.java  
 Handles database connection using JDBC.
 
-### ✔ Cart.java (Leena)  
+### Cart.java (Leena)  
 Stores cart items, quantity, and total price logic.
 
-### ✔ CheckoutServlet.java (Numaan)
+### CheckoutServlet.java (Numaan)
 Handles:
 - Validating checkout form  
 - Creating order  
@@ -185,6 +185,4 @@ http://localhost:8080/Artify/index.html
 
 ---
 
-## License
-This project is for educational use under CAT201 (USM).
 
