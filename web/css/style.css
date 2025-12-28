@@ -158,21 +158,6 @@ main {
     padding: 0 2rem;
 }
 
-/* Cards */
-.card {
-    background-color: var(--bg-white);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-    margin-bottom: 1.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
 /* Buttons */
 button, .btn {
     background-color: var(--primary-color);
@@ -209,91 +194,163 @@ footer {
     }
 }
 
-/* About Page Specific Layout */
-.about-page {
-    background-color:white;
-    padding-bottom: 80px;
+/* Container and Page Background */
+body {
+    background-color: #f9efe6; 
+    margin: 0;
 }
 
+.about-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
 
-.about-hero {
+/* Hero Box (Top) */
+.about-hero-box {
+    background: #fff;
     display: flex;
     align-items: center;
-    min-height: 80vh;
-    padding: 0 5%;
-    gap: 50px;
-}
-
-.about-text {
-    letter-spacing: 8px;
-    font-weight: 300;
-    margin-top: 20px;    
-    margin-bottom: 10px; 
-    color: #444;
-    text-align: center;
-}
-
-.hero-image-container {
-    flex: 1;
-    height: 100px;
+    margin-bottom: 30px;
+    height: 350px;
     overflow: hidden;
 }
 
-.hero-img {
+.about-hero-image {
+    flex: 1;
+    height: 100%;
+}
+
+.about-hero-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.hero-text-container {
-    flex: 1;
+.about-hero-text {
+    flex: 2;
+    padding: 60px;
     text-align: left;
-    background-color: #ffffff; 
-    width: 80%;              
-    max-width: 1000px;        
-    margin:5px auto;       
+}
+
+/* Brand Logo Styling */
+.brand-logo-large {
+    font-family: 'Monsieur La Doulaise', cursive;
+    font-size: 8rem;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1;
+}
+
+.brand-logo-large span {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    letter-spacing: 10px;
+    margin-left: -10px;
+    font-weight: 300;
+}
+
+/* Details Box (Bottom) */
+.about-details-box {
+    background: #fff;
+    display: flex;
+    gap: 60px;
     padding: 60px;
 }
 
-
-.about-content {
-    max-width: 900px;
-    margin: auto 0;
-    padding: 20px;
+.details-left, .details-right {
+    flex: 1;
 }
 
-.story-text {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: #333;
+.detail-title {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
     margin-bottom: 30px;
-    font-family: 'Abhaya Libre', serif;
 }
 
+/* Drop Cap and Story */
 .drop-cap {
     float: left;
-    font-family: 'Monsieur La Doulaise', cursive;
-    font-size: 6rem;
+    font-size: 5rem;
     line-height: 0.8;
     padding-right: 15px;
-    color: #000;
-}
-
-.section-title {
     font-family: 'Playfair Display', serif;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-size: 1rem;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    display: inline-block;
-    padding-bottom: 5px;
 }
 
-.email-link {
-    color: #000;
-    font-weight: bold;
+.story-content p {
+    line-height: 1.8;
+    color: #444;
+}
+
+/* Founder Section */
+.values-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.value-item {
+    text-align: center;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Styling Contact Box */
+.about-contact-box {
+    background-color: #fff;
+    padding: 60px 40px;
+    text-align: center;
+    border-top: 1px solid #eee; /* Subtle separation */
+}
+
+.contact-title {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.contact-divider {
+    width: 50px;
+    margin: 0 auto 40px;
+    border: 0;
+    border-top: 1px solid #000;
+}
+
+.contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 80px; /* Large gap for that airy gallery feel */
+}
+
+.contact-item h4 {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.contact-item p {
+    font-family: 'Abhaya Libre', serif;
+    font-size: 1rem;
+    color: #1a1a1a;
+}
+
+.contact-item a {
+    color: #1a1a1a;
     text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.contact-item a:hover {
     border-bottom: 1px solid #000;
 }
 
@@ -315,7 +372,6 @@ footer {
     margin-bottom: 1.5rem;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* transition: all 0.4s ease;*/
     border-bottom: 1px solid #eee; 
 }
 
