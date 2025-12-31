@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS CART(
 CREATE TABLE IF NOT EXISTS CART_ITEM(
     CART_ITEM_ID INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     QUANTITY INT,
-    CART_ID INT,
-    CONSTRAINT Fk_Cus_Cart_Info FOREIGN KEY (CART_ID) REFERENCES CART(CART_ID) ON DELETE CASCADE,
     ARTWORK_ID INT,
-    CONSTRAINT FK_CartArtwork FOREIGN KEY (ARTWORK_ID) REFERENCES ARTWORKS(ARTWORK_ID) ON DELETE CASCADE
+    CONSTRAINT FK_CartArtwork FOREIGN KEY (ARTWORK_ID) REFERENCES ARTWORKS(ARTWORK_ID) ON DELETE CASCADE,
+    CART_ID INT,
+    CONSTRAINT Fk_Cus_Cart_Info FOREIGN KEY (CART_ID) REFERENCES CART(CART_ID) ON DELETE CASCADE
 );
 ALTER TABLE CART_ITEM
 MODIFY COLUMN QUANTITY INT(4);
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS CATEGORY(
 
 -- Sample records for Customer
 DELETE FROM CUSTOMER;
-INSERT INTO CUSTOMER VALUES(1101, "Lisa", "lisajones@email.com", "password101", "Bikini Bottom street", "0123456789");
-INSERT INTO CUSTOMER VALUES(1102, "Nathan", "nathannnn@email.com", "101drowssap", "Mushroom Land", "0112456789");
+INSERT INTO CUSTOMER VALUES(1, "Lisa", "lisajones@email.com", "password101", "Bikini Bottom street", "0123456789");
+INSERT INTO CUSTOMER VALUES(2, "Nathan", "nathannnn@email.com", "101drowssap", "Mushroom Land", "0112456789");
 
 
 -- Sample records for Artworks 
@@ -113,20 +113,22 @@ INSERT INTO ARTWORKS VALUES(6, "Packaging Across The Solar System", "20 x 20 (in
 
 -- Sample records for Cart
 DELETE FROM CART;
-INSERT INTO CART VALUES(201, 1101);
-INSERT INTO CART VALUES(202, 1102);
-
+INSERT INTO CART VALUES(1, 1);
+INSERT INTO CART VALUES(2, 2);
 
 -- Sample records for Cart Item
+-- Structure Cart_item ID, quantity, artwork_id, cart_id
 DELETE FROM CART_ITEM;
-INSERT INTO CART_ITEM VALUES(301, 2, 201, 1);
+INSERT INTO CART_ITEM VALUES(1, 1, 1, 1);
+INSERT INTO CART_ITEM VALUES(2, 1, 1, 2);
+INSERT INTO CART_ITEM VALUES(3, 1, 3, 1);
 
 
 -- Sample records for Cateogry
 DELETE FROM CATEGORY;
-INSERT INTO CATEGORY VALUES(100, "Painting" ,"Gems made with love");
-INSERT INTO CATEGORY VALUES(101, "Digital"  ,"Tiny squares put together to forge a masterpiece");
-INSERT INTO CATEGORY VALUES(102, "Poster" ,"A curated collection of aesthetics");
+INSERT INTO CATEGORY VALUES(1, "Painting" ,"Gems made with love");
+INSERT INTO CATEGORY VALUES(2, "Digital"  ,"Tiny squares put together to forge a masterpiece");
+INSERT INTO CATEGORY VALUES(3, "Poster" ,"A curated collection of aesthetics");
 
 
  
