@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout - Artify</title>
+</head>
+<body>
+
+<h2>Checkout</h2>
+
+    <!-- 
+    NUMAAN SUHAFF – CHECKOUT FORM (FOR BACKEND SERVLET)
+     This form sends data to CheckoutServlet.java 
+     Do not modify this section unless needed by backend logic. 
+    -->
+<form action="CheckoutServlet" method="post">
+
+    <!-- Customer Name (for display only) -->
+    <input type="text" name="name" placeholder="Your Name" required><br><br>
+
+    <!-- Email -->
+    <input type="email" name="email" placeholder="Email" required><br><br>
+
+    <!-- Customer Address -->
+    <textarea name="address" placeholder="Shipping Address" required></textarea><br><br>
+
+    <!--
+         NUMAAN SUHAFF – REQUIRED BACKEND FIELDS (DO NOT REMOVE)
+         These hidden inputs are required by your CheckoutServlet.
+         They will be replaced dynamically by the Cart page.
+    -->
+
+    <!-- CUSTOMER ID -->
+    <input type="hidden" name="customer_id" value="1"> 
+    <!-- ^ Example value. Replace with session variable later. -->
+
+    <!-- ARRAY OF ARTWORKS (Example placeholders) -->
+    <input type="hidden" name="artwork_id" value="10">
+    <input type="hidden" name="quantity" value="2">
+    <input type="hidden" name="price" value="150.00">
+
+    <input type="hidden" name="artwork_id" value="12">
+    <input type="hidden" name="quantity" value="1">
+    <input type="hidden" name="price" value="99.00">
+
+    <!-- TOTAL ORDER PRICE -->
+    <input type="hidden" name="total_amount" value="399.00">
+
+    <!-- 
+         END OF NUMAAN'S BACKEND CHECKOUT DATA BLOCK
+    -->
+
+    <button type="submit">Submit Order</button>
+</form>
+
+</body>
+</html>
