@@ -381,3 +381,129 @@ main {
         gap: 40px;
     }
 }
+/* ================= CART PAGE ================= */
+
+.cart-container {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.cart-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 40px;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 30px;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.cart-item-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+}
+
+.cart-item-info p {
+    font-family: 'Abhaya Libre', serif;
+    color: #666;
+}
+
+.cart-item-price {
+    font-weight: bold;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.remove-btn:hover {
+    color: black;
+}
+
+.cart-summary {
+    margin-top: 60px;
+    text-align: right;
+}
+
+.cart-summary p {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #777;
+}
+
+.cart-summary h2 {
+    font-size: 2rem;
+    margin: 10px 0 30px;
+}
+/* ================= ART DETAIL PAGE ================= */
+
+.art-detail {
+  max-width: 1100px;
+  margin: 60px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: 0 20px;
+}
+
+.art-detail-image img {
+  width: 100%;
+  height: auto;
+}
+
+.art-detail-info h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+}
+
+.art-detail-info h3 {
+  font-family: 'Montserrat', sans-serif;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.art-detail-info p {
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.art-actions {
+  display: flex;
+  gap: 20px;
+}
+
+.art-actions button {
+  padding: 12px 20px;
+  cursor: pointer;
+  border: none;
+  background: black;
+  color: white;
+}
+
+.art-actions button:hover {
+  opacity: 0.8;
+}
