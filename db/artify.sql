@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS CART_ITEM(
     CONSTRAINT Fk_Cus_Cart_Info FOREIGN KEY (CART_ID) REFERENCES CART(CART_ID) ON DELETE CASCADE
 );
 ALTER TABLE CART_ITEM
-MODIFY COLUMN QUANTITY INT(4);
+    MODIFY COLUMN QUANTITY INT(4);
 
 
 -- ORDERS TABLE
@@ -103,12 +103,18 @@ INSERT INTO CUSTOMER VALUES(2, "Nathan", "nathannnn@email.com", "101drowssap", "
 
 -- Sample records for Artworks 
 DELETE FROM ARTWORKS;
-INSERT INTO ARTWORKS VALUES(1, "Lisa Mona", "20 x 30 (inches)", "A painting of a beautiful woman from the 90s", 250, "Leonardo Da Vinci", "src/images/painting_1.jpg", 1000, 100);
-INSERT INTO ARTWORKS VALUES(2, "A girl with a fabulous earring", "20 x 30 (inches)", "A painting of a beautiful woman and her fabulous earring from the 90s", 250, "Johannes Vermeer", "src/images/painting_2.jpg", 1000, 100);
-INSERT INTO ARTWORKS VALUES(3, "Jett: Collector's edition", "40 x 20 (inches)", "Jett is now available in all her glory!", 120, "VALORANT", "src/images/poster_1.jpg", 500, 102);
-INSERT INTO ARTWORKS VALUES(4, "Haven: Collector's edition", "50 x 30 (inches)", "Decorate your room with one of VALORANT's unique maps", 160, "VALORANT", "src/images/poster_2.jpg", 500, 102);
-INSERT INTO ARTWORKS VALUES(5, "Elegant Hunter Of The Night", "30 x 30 (inches)", "Swifting through the breeze, in depths of the darkness, lurks elegance that travels high", 160, "mich-spich", "src/images/pixel_1.png", 500, 101);
-INSERT INTO ARTWORKS VALUES(6, "Packaging Across The Solar System", "20 x 20 (inches)", "Move along the orbit!", 160, "Kellay9", "src/images/pixel_2.png", 500, 101);
+INSERT INTO ARTWORKS VALUES(1, "Lisa Mona", "20 x 30 (inches)", "A painting of a beautiful woman from the 90s", 250, "Leonardo Da Vinci", "src/images/painting_1.jpg", 1000, 1);
+INSERT INTO ARTWORKS VALUES(2, "A girl with a fabulous earring", "20 x 30 (inches)", "A painting of a beautiful woman and her fabulous earring from the 90s", 250, "Johannes Vermeer", "src/images/painting_2.jpg", 1000, 1);
+INSERT INTO ARTWORKS VALUES(3, "Starry Night", "20 x 40 (inches)", "The view captured by the asylum window in, this masterpiece was painted in Canvas in 1889.", 1000, "Vincent Van Gogh", "src/images/painting_3.jpg", 1000, 1);
+INSERT INTO ARTWORKS VALUES(4, "Water Lilies", "20 x 40 (inches)", "One of the many flowers found in Claude's Garden", 950, "Claude Monet", "src/images/painting_4.jpeg", 1000, 1);
+INSERT INTO ARTWORKS VALUES(5, "Landscape with the Fall of Icarus", "40 x 20 (inches)", "A painting of Icarus, a Greek mythology, who successfully flew with wings made out of beeswax.", 1200, "Pieter Bruegel the Elder", "src/images/painting_5.jpeg", 1000, 1);
+INSERT INTO ARTWORKS VALUES(6, "Three Musicians", "40 x 20 (inches)", "Each individual in this piece was representing Picasso himself (Harlequin, Pierrot, and a Monk)", 900, "Pablo Picasso", "src/images/painting_6.jpeg", 1000, 1);
+INSERT INTO ARTWORKS VALUES(7, "A Sunday Afternoon on the Island of La Grande Jatte", "40 x 20 (inches)", "A lovely afternoon on a Sunday of Paris, where Parisians are seen at the banks of River Seine.", 950, "Georges Seurat", "src/images/painting_7.jpeg", 1000, 1);
+INSERT INTO ARTWORKS VALUES(8, "Impression, Sunrise", "40 x 20 (inches)", "This painting depicted the port of Le Havre, Claude's hometown.", 950, "Georges Seurat", "src/images/painting_8.jpeg", 1000, 1);
+INSERT INTO ARTWORKS VALUES(9, "View of Toledo", "40 x 20 (inches)", "One of the most natural paintings recorded in history. This city of Spain was also accurately replicated by El Greco.", 1500, "El Greco", "src/images/painting_9.jpeg", 1000, 1);
+INSERT INTO ARTWORKS VALUES(10, "The Tower of Babel", "40 x 20 (inches)", "A depiction of Tower of Babel in accordance of Genesis. Mythologically, this tower represented the origin of languages.", 1000, "Pieter Bruegel the Elder", "src/images/painting_10.jpeg", 1000, 1);
+
+
 
 
 -- Sample records for Cart
