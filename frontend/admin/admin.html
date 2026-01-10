@@ -29,11 +29,25 @@
   <h1>Admin Dashboard</h1>
 
   <div class="admin-grid">
-    <div class="admin-box">Total Users: 120</div>
-    <div class="admin-box">Total Artworks: 45</div>
-    <div class="admin-box">Orders Today: 12</div>
+    <div class="admin-box" id="totalUsers"></div>
+    <div class="admin-box" id="totalArtworks">Total Artworks: 0</div>
+    <div class="admin-box" id="ordersToday">Orders Today: 0</div>
+  </div>
+
+  <h2>Seller Requests</h2>
+  <div id="requests"></div>
+
+  <!-- MY ACCOUNT -->
+  <button onclick="toggleAccount()">My Account</button>
+
+  <div id="accountBox" class="account-box">
+    <pre id="info"></pre>
+    <p id="role"></p>
+    <button onclick="logout()">Logout</button>
   </div>
 </section>
 
+<script src="../js/account.js"></script>
+<script src="../js/admin.js"></script>
 </body>
 </html>

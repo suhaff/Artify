@@ -557,3 +557,14 @@ footer {
   border: none;
   border-top: 1px solid black;
 }
+.account-box {
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  background: #fdf6ec;
+  border: 1px solid #ccc;
+}
+
+.account-box.show {
+  display: block;
+}

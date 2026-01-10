@@ -2,32 +2,24 @@ package com.artify.service;
 
 import com.artify.model.User;
 import com.artify.repository.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public AuthService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public void register(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.save(user);
-    }
+    public User authenticate(String email, String password) {
+        User user = userRepository.findByEmail(email).orElse(null);
 
-    public String login(User user) {
-        User dbUser = userRepository.findByUsername(user.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        if (!encoder.matches(user.getPassword(), dbUser.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
         }
 
-        return "LOGIN_SUCCESS"; // later replace with JWT
+        return null;
     }
 }
