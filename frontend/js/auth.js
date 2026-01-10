@@ -1,27 +1,56 @@
-document.getElementById("signupForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
+const API = "http://localhost:8080/api/auth";
 
-    const user = {
-        fullName: document.getElementById("fullName").value,
-        age: parseInt(document.getElementById("age").value),
-        email: document.getElementById("email").value,
-        username: document.getElementById("username").value,
-        password: document.getElementById("password").value
-    };
+// REGISTER
+document.getElementById("signupForm")?.addEventListener("submit", async e => {
+  e.preventDefault();
 
-    try {
-        const res = await fetch("http://localhost:8080/api/auth/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user)
-        });
+  const payload = {
+    name: fullName.value,
+    age: Number(age.value),
+    address: address.value,
+    phone: phone.value,
+    email: email.value,
+    password: password.value
+  };
 
-        if (!res.ok) throw new Error("Signup failed");
+  const res = await fetch(`${API}/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
 
-        alert("Account created successfully!");
-        document.getElementById("signupModal").style.display = "none";
+  if (!res.ok) {
+    alert(await res.text());
+    return;
+  }
 
-    } catch (err) {
-        alert(err.message);
-    }
+  alert("Account created successfully. Please login.");
+  window.location.href = "login.html";
+});
+
+// LOGIN
+document.getElementById("loginForm")?.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const res = await fetch(`${API}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: email.value,
+      password: password.value
+    })
+  });
+
+  if (!res.ok) {
+    alert("Invalid credentials");
+    return;
+  }
+
+  const data = await res.json();
+
+  // SESSION STORAGE ONLY
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("currentUser", JSON.stringify(data));
+
+  window.location.href = "index.html";
 });

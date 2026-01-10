@@ -35,7 +35,17 @@
     <input type="file" required>
     <button type="submit">Upload Artwork</button>
   </form>
+
+  <!-- MY ACCOUNT -->
+  <button onclick="toggleAccount()">My Account</button>
+
+  <div id="accountBox" class="account-box">
+    <pre id="info"></pre>
+    <p id="role"></p>
+    <button onclick="logout()">Logout</button>
+  </div>
 </section>
 
+<script src="../js/account.js"></script>
 </body>
 </html>

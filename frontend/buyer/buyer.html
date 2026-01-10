@@ -29,12 +29,23 @@
   <h1>Buyer Dashboard</h1>
 
   <div class="dashboard-grid">
-    <a href="catalogue.html" class="card">Browse Catalogue</a>
-    <a href="wishlist.html" class="card">My Wishlist</a>
-    <a href="cart.html" class="card">My Cart</a>
-    <a href="checkout.html" class="card">Checkout</a>
+    <a href="../catalogue.html" class="card">Browse Catalogue</a>
+    <a href="../wishlist.html" class="card">My Wishlist</a>
+    <a href="../cart.html" class="card">My Cart</a>
+    <a href="../checkout.html" class="card">Checkout</a>
+  </div>
+
+  <!-- MY ACCOUNT -->
+  <button onclick="toggleAccount()">My Account</button>
+
+  <div id="accountBox" class="account-box">
+    <pre id="info"></pre>
+    <p id="role"></p>
+    <button id="sellerBtn" onclick="requestSeller()">Request Seller</button>
+    <button onclick="logout()">Logout</button>
   </div>
 </section>
 
+<script src="../js/account.js"></script>
 </body>
 </html>

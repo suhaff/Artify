@@ -1,0 +1,13 @@
+com\artify\dto\LoginResponse.class
+com\artify\model\User.class
+com\artify\controller\AuthController.class
+com\artify\repository\UserRepository.class
+com\artify\security\JwtUtil.class
+com\artify\service\AuthService.class
+com\artify\ArtifyApplication.class
+com\artify\dto\LoginRequest.class
+com\artify\security\SecurityConfig.class
+com\artify\dto\AuthResponse.class
+com\artify\dto\SignupRequest.class
+com\artify\controller\TestController.class
+com\artify\dto\RegisterRequest.class
