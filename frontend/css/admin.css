@@ -1,0 +1,16 @@
+.admin {
+  padding: 80px;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 30px;
+}
+
+.admin-box {
+  background: #fdf6ec;
+  padding: 30px;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+}

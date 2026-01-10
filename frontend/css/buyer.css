@@ -1,0 +1,25 @@
+.dashboard {
+  padding: 80px;
+  text-align: center;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.card {
+  padding: 40px;
+  background: #fdf6ec;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+}
+
+.card:hover {
+  background: black;
+  color: white;
+}
