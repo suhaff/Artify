@@ -1,0 +1,51 @@
+.checkout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: 80px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.checkout-summary,
+.checkout-form {
+  background: #fdf6ec;
+  padding: 30px;
+}
+
+.checkout-summary h2,
+.checkout-form h2 {
+  margin-bottom: 20px;
+}
+
+.checkout-summary div {
+  margin-bottom: 10px;
+}
+
+.checkout-form input,
+.checkout-form textarea,
+.checkout-form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #aaa;
+  background: transparent;
+}
+
+.checkout-form textarea {
+  resize: none;
+  height: 90px;
+}
+
+.checkout-form button {
+  width: 100%;
+  padding: 14px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.checkout-form button:hover {
+  opacity: 0.9;
+}
