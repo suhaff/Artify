@@ -1,34 +1,27 @@
-const API = "http://localhost:8080/api";
+document.getElementById("signupForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    const user = {
+        fullName: document.getElementById("fullName").value,
+        age: parseInt(document.getElementById("age").value),
+        email: document.getElementById("email").value,
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value
+    };
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+    try {
+        const res = await fetch("http://localhost:8080/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user)
+        });
 
-  const res = await fetch(`${API}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  });
+        if (!res.ok) throw new Error("Signup failed");
 
-  if (!res.ok) {
-    document.getElementById("error").innerText = "Invalid login";
-    return;
-  }
+        alert("Account created successfully!");
+        document.getElementById("signupModal").style.display = "none";
 
-  const user = await res.json();
-
-  // Save session
-  localStorage.setItem("user", JSON.stringify(user));
-  localStorage.setItem("role", user.role);
-
-  // Redirect by role
-  if (user.role === "BUYER") {
-    window.location.href = "buyer/dashboard.html";
-  } else if (user.role === "SELLER") {
-    window.location.href = "seller/dashboard.html";
-  } else if (user.role === "ADMIN") {
-    window.location.href = "admin/dashboard.html";
-  }
+    } catch (err) {
+        alert(err.message);
+    }
 });

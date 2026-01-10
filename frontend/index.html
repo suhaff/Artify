@@ -9,18 +9,37 @@
 </head>
 <body>
 
-<nav>
-  <div class="nav-links" id="navLinks">
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="catalogue.html">Catalogue</a>
-    <a href="cart.html">Cart</a>
-    <a href="checkout.html">Checkout</a>
+<header class="site-header">
+  <div class="header-row">
+    
+    <!-- LEFT: LOGO + NAME -->
+    <div class="brand">
+      <img src="/assets/logo.png" class="brand-logo">
+      <span class="brand-name">ARTIFY</span>
+    </div>
+
+    <!-- CENTER: NAV -->
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="checkout.html">Checkout</a>
+      <a href="cart.html" class="cart-icon">🛒</a>
+    </nav>
+
+    <!-- RIGHT: AUTH -->
+    <div class="auth-links">
+      <a href="login.html">Login</a>
+      <span>/</span>
+      <a href="register.html">Sign Up</a>
+    </div>
+
+
   </div>
 
-  <div class="hamburger" id="hamburger">&#9776;</div>
-</nav>
-
+  <!-- ABOUT US (LEFT, BELOW LOGO ONLY) -->
+  <div class="about-link">
+    <a href="about.html">About Us</a>
+  </div>
 
   <hr class="header-line">
 </header>

@@ -10,15 +10,15 @@ USE artify;
    USERS (BUYER / SELLER / ADMIN)
    =============================== */
 CREATE TABLE users (
-  user_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,
-  email VARCHAR(100) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  address VARCHAR(255),
-  phone VARCHAR(20),
-  role ENUM('BUYER','SELLER','ADMIN') NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 /* ===============================
    CATEGORY
