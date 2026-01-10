@@ -156,3 +156,4 @@ VALUES
 /* Coupon */
 INSERT INTO coupons (code, discount_percent, expiry_date)
 VALUES ('ART10', 10, '2026-12-31');
+SELECT * FROM USERS;

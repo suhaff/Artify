@@ -1,6 +1,7 @@
 package com.artify.controller;
 
 import com.artify.dto.AuthResponse;
+import com.artify.dto.RegisterRequest;
 import com.artify.model.User;
 import com.artify.repository.UserRepository;
 import com.artify.security.JwtUtil;
@@ -21,16 +22,24 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody RegisterRequest req) {
 
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(req.email).isPresent()) {
             return ResponseEntity.badRequest().body("Email already exists");
         }
 
+        User user = new User();
+        user.setName(req.name);
+        user.setAge(req.age);
+        user.setAddress(req.address);
+        user.setPhone(req.phone);
+        user.setEmail(req.email);
+        user.setPassword(req.password); // hashing later
         user.setRole("BUYER");
         user.setSellerRequest(false);
 
         userRepository.save(user);
+
         return ResponseEntity.ok("Registered successfully");
     }
 
