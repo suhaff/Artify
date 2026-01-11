@@ -1,18 +1,23 @@
 package com.artify.security;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component   
+@Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "artify_secret_key";
-    private final long EXPIRATION_TIME = 1000 * 60 * 60 * 24;
+    // Must be at least 32 characters for HS256
+    private static final String SECRET = "artify_super_secret_key_1234567890";
+
+    private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24; // 24 hours
+
+    private static final SecretKey KEY = Keys.hmacShaKeyFor(SECRET.getBytes());
 
     public String generateToken(String email, String role) {
 
@@ -20,11 +25,11 @@ public class JwtUtil {
         claims.put("role", role);
 
         return Jwts.builder()
-                .setClaims(claims)
                 .setSubject(email)
+                .setClaims(claims)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(KEY)
                 .compact();
     }
 }
