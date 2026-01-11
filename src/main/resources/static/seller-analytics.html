@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Artify Seller – Analytics</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family:"Montserrat",sans-serif;
+  background:#fdf3e8;
+}
+
+/* NAV */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 50px;
+  background:#fdf3e8;
+  border-bottom:1px solid rgba(0,0,0,.1);
+}
+.navbar a{
+  margin:0 15px;
+  text-decoration:none;
+  color:black;
+}
+.navbar a.active{ text-decoration:underline; }
+
+.account-btn{
+  background:#6c6cff;
+  color:white;
+  border:none;
+  padding:10px 22px;
+  border-radius:20px;
+}
+
+/* PAGE */
+.page{
+  padding:50px;
+}
+.page h1{
+  font-size:40px;
+  margin-bottom:30px;
+}
+
+/* STATS */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px;
+  margin-bottom:50px;
+}
+.stat{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.stat h2{ margin:10px 0; }
+
+/* CHARTS */
+.charts{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+}
+.chart-box{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div style="font-weight:600;font-size:20px;">ARTIFY Seller</div>
+  <div>
+    <a href="seller-dashboard.html">Dashboard</a>
+    <a href="seller-products.html">Your Products</a>
+    <a href="seller-reviews.html">Reviews</a>
+    <a class="active" href="seller-analytics.html">Analytics</a>
+    <a href="seller-withdraw.html">Withdraw</a>
+  </div>
+  <button class="account-btn">My Account</button>
+</div>
+
+<div class="page">
+  <h1>Sales Analytics</h1>
+
+  <div class="stats">
+    <div class="stat">
+      <p>Total Products</p>
+      <h2>8</h2>
+    </div>
+    <div class="stat">
+      <p>Total Orders</p>
+      <h2>42</h2>
+    </div>
+    <div class="stat">
+      <p>Total Revenue</p>
+      <h2>$2,480</h2>
+    </div>
+    <div class="stat">
+      <p>Avg Rating</p>
+      <h2>4.6 ★</h2>
+    </div>
+  </div>
+
+  <div class="charts">
+    <div class="chart-box">
+      <h3>Monthly Revenue</h3>
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Product Sales</h3>
+      <canvas id="productChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Revenue Line Chart */
+new Chart(document.getElementById("revenueChart"), {
+  type: "line",
+  data: {
+    labels: ["Jan","Feb","Mar","Apr","May","Jun"],
+    datasets: [{
+      label:"Revenue ($)",
+      data:[320, 450, 380, 620, 700, 820],
+      borderColor:"#6c6cff",
+      backgroundColor:"rgba(108,108,255,.2)",
+      tension:.4,
+      fill:true
+    }]
+  }
+});
+
+/* Product Bar Chart */
+new Chart(document.getElementById("productChart"), {
+  type: "bar",
+  data: {
+    labels:["Sunset","Abstract","Ocean","Portrait","Minimal"],
+    datasets:[{
+      label:"Sales",
+      data:[12,19,9,15,7],
+      backgroundColor:"#6c6cff"
+    }]
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<h2>Complaints</h2>
+<div id="box"></div>
+
+<script>
+fetch("http://localhost:8080/api/complaints/all")
+.then(r=>r.json())
+.then(data=>{
+ data.forEach(c=>{
+   box.innerHTML+=`
+     <div class="complaint">
+       <strong>${c.email}</strong><br>
+       ${c.message}<br>
+       Status: ${c.status}
+     </div>`;
+ });
+});
+</script>

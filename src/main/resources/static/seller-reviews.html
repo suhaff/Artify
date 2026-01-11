@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Artify Seller – Reviews</title>
+
+<style>
+body{
+  margin:0;
+  font-family:"Montserrat",sans-serif;
+  background:#fdf3e8;
+}
+
+/* NAV */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 50px;
+  background:#fdf3e8;
+  border-bottom:1px solid rgba(0,0,0,.1);
+}
+.navbar a{
+  margin:0 15px;
+  text-decoration:none;
+  color:black;
+}
+.navbar a.active{ text-decoration:underline; }
+
+.account-btn{
+  background:#6c6cff;
+  color:white;
+  border:none;
+  padding:10px 22px;
+  border-radius:20px;
+}
+
+/* PAGE */
+.page{
+  padding:60px;
+}
+.page h1{
+  font-size:40px;
+  margin-bottom:30px;
+}
+
+/* REVIEW CARD */
+.review{
+  background:white;
+  border-radius:20px;
+  padding:25px 30px;
+  margin-bottom:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.review-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.name{
+  font-weight:600;
+}
+
+.stars{
+  color:gold;
+}
+
+.review-text{
+  margin:10px 0 15px;
+  font-size:16px;
+}
+
+.reply-box{
+  margin-top:15px;
+}
+
+.reply-box textarea{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+.reply-btn{
+  margin-top:10px;
+  padding:10px 20px;
+  background:black;
+  color:white;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.reply{
+  background:#f3f1ff;
+  padding:15px;
+  border-radius:15px;
+  margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div style="font-weight:600;font-size:20px;">ARTIFY Seller</div>
+  <div>
+    <a href="seller-dashboard.html">Dashboard</a>
+    <a href="seller-products.html">Your Products</a>
+    <a class="active" href="seller-reviews.html">Reviews</a>
+    <a href="seller-analytics.html">Analytics</a>
+    <a href="seller-withdraw.html">Withdraw</a>
+  </div>
+  <button class="account-btn">My Account</button>
+</div>
+
+<div class="page">
+  <h1>Customer Reviews</h1>
+  <div id="reviews"></div>
+</div>
+
+<script>
+let reviews = JSON.parse(localStorage.getItem("reviews")) || [
+  {name:"John Doe",stars:5,text:"Absolutely beautiful artwork!",reply:""},
+  {name:"Aisha Rahman",stars:2,text:"Delivery was slow and frame was damaged.",reply:""},
+  {name:"Liam Wong",stars:4,text:"Great quality, would buy again.",reply:""}
+];
+
+function render(){
+  const container = document.getElementById("reviews");
+  container.innerHTML="";
+
+  reviews.forEach((r,i)=>{
+    container.innerHTML+=`
+      <div class="review">
+        <div class="review-header">
+          <span class="name">${r.name}</span>
+          <span class="stars">${"★".repeat(r.stars)}</span>
+        </div>
+        <div class="review-text">${r.text}</div>
+
+        ${r.reply ? `<div class="reply"><strong>You:</strong> ${r.reply}</div>` : `
+        <div class="reply-box">
+          <textarea id="reply${i}" placeholder="Write a reply..."></textarea>
+          <button class="reply-btn" onclick="reply(${i})">Reply</button>
+        </div>`}
+      </div>
+    `;
+  });
+
+  localStorage.setItem("reviews", JSON.stringify(reviews));
+}
+
+function reply(i){
+  const text = document.getElementById("reply"+i).value;
+  if(!text) return;
+  reviews[i].reply = text;
+  render();
+}
+
+render();
+</script>
+
+</body>
+</html>

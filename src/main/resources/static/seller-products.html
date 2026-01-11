@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Artify Seller – Products</title>
+
+<style>
+body{
+  margin:0;
+  font-family: "Montserrat", sans-serif;
+  background:#fdf3e8;
+}
+
+/* NAVBAR */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 50px;
+  background:#fdf3e8;
+  border-bottom:1px solid rgba(0,0,0,.1);
+}
+.navbar a{
+  margin:0 15px;
+  text-decoration:none;
+  color:black;
+  font-weight:500;
+}
+.navbar a.active{ text-decoration:underline; }
+
+.account-btn{
+  background:#6c6cff;
+  color:white;
+  border:none;
+  padding:10px 22px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* PAGE */
+.page{
+  padding:60px;
+}
+.page h1{
+  font-size:40px;
+  margin-bottom:20px;
+}
+
+/* ADD BUTTON */
+.add-btn{
+  background:black;
+  color:white;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+
+/* CARD */
+.card{
+  background:white;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  transition:.2s;
+}
+.card:hover{
+  transform:translateY(-5px);
+}
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+.card-body{
+  padding:20px;
+}
+.card-body h3{
+  margin:5px 0;
+}
+.card-body p{
+  font-weight:600;
+}
+.actions{
+  display:flex;
+  justify-content:space-between;
+  margin-top:15px;
+}
+.btn{
+  border:none;
+  padding:8px 15px;
+  border-radius:15px;
+  cursor:pointer;
+}
+.edit{ background:#6c6cff; color:white;}
+.del{ background:#ff4b4b; color:white;}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+.modal-box{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  width:400px;
+}
+.modal-box input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+.modal-box button{
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div style="font-weight:600;font-size:20px;">ARTIFY Seller</div>
+  <div>
+    <a href="seller-dashboard.html">Dashboard</a>
+    <a class="active" href="seller-products.html">Your Products</a>
+    <a href="seller-reviews.html">Reviews</a>
+    <a href="seller-analytics.html">Analytics</a>
+    <a href="seller-withdraw.html">Withdraw</a>
+  </div>
+  <button class="account-btn">My Account</button>
+</div>
+
+<div class="page">
+  <h1>Your Products</h1>
+  <button class="add-btn" onclick="openModal()">+ Add Artwork</button>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h3>Add Artwork</h3>
+    <input id="title" placeholder="Artwork name">
+    <input id="price" placeholder="Price">
+    <input id="img" placeholder="Image URL">
+    <button class="btn edit" onclick="save()">Save</button>
+    <button class="btn del" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<script>
+let products = JSON.parse(localStorage.getItem("sellerProducts")) || [
+ {title:"Golden Fields",price:120,img:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"},
+ {title:"Abstract Dreams",price:95,img:"https://images.unsplash.com/photo-1549880338-65ddcdfd017b"},
+ {title:"Ocean Flow",price:150,img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e"}
+];
+
+function render(){
+  const grid = document.getElementById("grid");
+  grid.innerHTML="";
+  products.forEach((p,i)=>{
+    grid.innerHTML+=`
+      <div class="card">
+        <img src="${p.img}">
+        <div class="card-body">
+          <h3>${p.title}</h3>
+          <p>$${p.price}</p>
+          <div class="actions">
+            <button class="btn edit" onclick="edit(${i})">Edit</button>
+            <button class="btn del" onclick="removeItem(${i})">Delete</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  localStorage.setItem("sellerProducts", JSON.stringify(products));
+}
+
+function openModal(){ modal.style.display="flex"; }
+function closeModal(){ modal.style.display="none"; }
+
+function save(){
+  products.push({
+    title:title.value,
+    price:price.value,
+    img:img.value || "https://images.unsplash.com/photo-1549880338-65ddcdfd017b"
+  });
+  closeModal();
+  render();
+}
+
+function removeItem(i){
+  products.splice(i,1);
+  render();
+}
+
+function edit(i){
+  const p = products[i];
+  title.value=p.title;
+  price.value=p.price;
+  img.value=p.img;
+  products.splice(i,1);
+  openModal();
+}
+
+render();
+</script>
+
+</body>
+</html>

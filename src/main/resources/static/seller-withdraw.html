@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Artify Seller – Withdraw</title>
+
+<style>
+body{
+  margin:0;
+  font-family:"Montserrat",sans-serif;
+  background:#fdf3e8;
+}
+
+/* NAV */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 50px;
+  background:#fdf3e8;
+  border-bottom:1px solid rgba(0,0,0,.1);
+}
+.navbar a{
+  margin:0 15px;
+  text-decoration:none;
+  color:black;
+}
+.navbar a.active{
+  text-decoration:underline;
+}
+.account-btn{
+  background:#6c6cff;
+  color:white;
+  border:none;
+  padding:10px 22px;
+  border-radius:20px;
+}
+
+/* PAGE */
+.page{
+  padding:60px;
+}
+.page h1{
+  font-size:40px;
+}
+
+/* BALANCE */
+.balance{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  width:300px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  margin:30px 0;
+}
+.balance h2{
+  font-size:40px;
+  margin:10px 0;
+}
+
+/* WITHDRAW BOX */
+.withdraw-box{
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  max-width:500px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.withdraw-box input{
+  width:100%;
+  padding:15px;
+  margin:15px 0;
+  border-radius:15px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+.withdraw-btn{
+  background:black;
+  color:white;
+  border:none;
+  padding:15px 30px;
+  border-radius:25px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+/* HISTORY */
+.history{
+  margin-top:50px;
+}
+.history-card{
+  background:white;
+  padding:20px 30px;
+  border-radius:20px;
+  box-shadow:0 10px 20px rgba(0,0,0,.06);
+  margin-bottom:15px;
+  display:flex;
+  justify-content:space-between;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div style="font-size:22px;font-weight:600;">ARTIFY Seller</div>
+  <div>
+    <a href="seller-dashboard.html">Dashboard</a>
+    <a href="seller-products.html">Your Products</a>
+    <a href="seller-reviews.html">Reviews</a>
+    <a href="seller-analytics.html">Analytics</a>
+    <a class="active" href="seller-withdraw.html">Withdraw</a>
+  </div>
+  <button class="account-btn">My Account</button>
+</div>
+
+<div class="page">
+
+  <h1>Withdraw Earnings</h1>
+
+  <div class="balance">
+    <p>Available Balance</p>
+    <h2 id="balance">$2,480</h2>
+  </div>
+
+  <div class="withdraw-box">
+    <h3>Request Withdrawal</h3>
+    <input type="number" id="amount" placeholder="Enter amount">
+    <input type="text" placeholder="Bank / Wallet">
+    <button class="withdraw-btn" onclick="withdraw()">Request Withdrawal</button>
+  </div>
+
+  <div class="history">
+    <h2>Withdrawal History</h2>
+    <div id="history"></div>
+  </div>
+
+</div>
+
+<script>
+let balance = 2480;
+let history = [];
+
+function withdraw(){
+  let amt = Number(document.getElementById("amount").value);
+  if(amt<=0 || amt>balance){
+    alert("Invalid amount");
+    return;
+  }
+
+  balance -= amt;
+  document.getElementById("balance").innerText = "$" + balance;
+
+  history.unshift({
+    amount:amt,
+    date:new Date().toLocaleDateString()
+  });
+
+  renderHistory();
+}
+
+function renderHistory(){
+  let box = document.getElementById("history");
+  box.innerHTML = "";
+
+  history.forEach(h=>{
+    box.innerHTML += `
+      <div class="history-card">
+        <span>Withdrawal</span>
+        <span>$${h.amount} — ${h.date}</span>
+      </div>
+    `;
+  });
+}
+</script>
+
+</body>
+</html>
