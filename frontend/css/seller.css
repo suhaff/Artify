@@ -1,0 +1,23 @@
+.seller {
+  padding: 80px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.upload-form {
+  background: #fdf6ec;
+  padding: 30px;
+}
+
+.upload-form input,
+.upload-form button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+.upload-form button {
+  background: black;
+  color: white;
+  border: none;
+}
