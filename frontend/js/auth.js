@@ -59,9 +59,18 @@ if (loginForm) {
 
     const data = await res.json();
 
+    // Save JWT token
     localStorage.setItem("token", data.token);
-    localStorage.setItem("currentUser", JSON.stringify(data));
 
+    // Save only user fields (NOT the token)
+    localStorage.setItem("currentUser", JSON.stringify({
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      role: data.role
+    }));
+
+    // Go back to homepage
     window.location.href = "index.html";
   });
 }

@@ -46,9 +46,13 @@
     <h2>Shipping & Payment</h2>
 
     <form id="checkoutForm">
-      <input type="text" placeholder="Full Name" required>
-      <input type="email" placeholder="Email" required>
-      <textarea placeholder="Shipping Address" required></textarea>
+      <input id="name" type="text" placeholder="Full Name" required>
+      <input id="email" type="email" placeholder="Email" required>
+      <textarea id="address" placeholder="Shipping Address" required></textarea>
+
+      <input id="coupon" placeholder="Coupon Code">
+      <button type="button" onclick="applyCoupon()">Apply Coupon</button>
+
 
       <select required>
         <option value="">Select Payment Method</option>

@@ -1,76 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Abril+Fatface&family=Beau+Rivage&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@400..900&family=Climate+Crisis&family=Ephesis&family=Monsieur+La+Doulaise&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Smooch+Sans:wght@100..900&family=Titan+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/base.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Artify</title>
+  <meta charset="UTF-8">
+  <title>About Artify</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">
+
+  <!-- Base Styles -->
+  <link rel="stylesheet" href="css/base.css">
+
+  <style>
+    /* ===== ABOUT PAGE LAYOUT ===== */
+
+    .about-wrapper {
+      max-width: 1200px;
+      margin: 80px auto 120px;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 0.8fr;
+      gap: 60px;
+    }
+
+    .about-title {
+      grid-column: 1 / span 3;
+      font-family: "Cinzel", serif;
+      font-size: 4rem;
+      letter-spacing: 10px;
+      margin-bottom: 10px;
+    }
+
+    .about-subtitle {
+      grid-column: 1 / span 3;
+      font-size: 0.9rem;
+      letter-spacing: 6px;
+      color: #888;
+      margin-bottom: 60px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: "Cinzel", serif;
+      font-size: 0.9rem;
+      letter-spacing: 4px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .founder-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-family: Montserrat;
+      font-size: 0.95rem;
+    }
+
+    .founder-list div {
+      cursor: default;
+      transition: transform 0.2s ease;
+    }
+
+    .founder-list div:hover {
+      transform: translateX(8px);
+      color: #6f6cf5;
+    }
+
+    .story-box {
+      font-family: Montserrat;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .dropcap {
+      font-family: "Monsieur La Doulaise", cursive;
+      font-size: 4.5rem;
+      float: left;
+      margin-right: 12px;
+      margin-top: 10px;
+      line-height: 0.6;
+    }
+
+    .contact-box {
+      font-family: Montserrat;
+      font-size: 0.9rem;
+    }
+
+    .contact-box a {
+      color: #6f6cf5;
+      text-decoration: none;
+    }
+
+    .contact-box a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== INTERACTIVE CARD ===== */
+    .value-card {
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      margin-top: 30px;
+    }
+
+    .value-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 55px rgba(0,0,0,0.2);
+    }
+
+    .value-card h4 {
+      font-family: Cinzel;
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .value-card p {
+      font-family: Montserrat;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .about-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .about-title, .about-subtitle {
+        grid-column: 1;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <header class="site-header">
-        <div class="header-row">
-            <div class="brand">
-            <img src="assets/logo.png" class="brand-logo">
-            <span class="brand-name">ARTIFY</span>
-            </div>
 
-            <nav class="main-nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="catalogue.html">Catalogue</a>
-            <a href="wishlist.html" title="Wishlist">Wishlist</a>
-            <a href="cart.html">Cart</a>
-            <a href="checkout.html">Checkout</a>
-            </nav>
-
-            <div class="auth-links">
-                <a href="login.html">Login</a>
-                <span>/</span>
-                <a href="register.html">Sign Up</a>
-            </div>
-        </div>
-        <hr class="header-line">
-    </header>
-
-    <main class="about-details-box">
-    <section class="about-hero-box">
-        <div class="about-hero-text">
-            <h1 class="brand-logo-large">A<span>BOUT US</span></h1>
-            <p class="hero-tagline">Our Story. Our Passion. Your Art.</p>
-        </div>
-    </section>
-    
-    <section class="about-hero-box">
-    <div class="details-left">
-        <h3 class="detail-title">Meet The Founders</h3>
-        <div class="values-grid">
-            <div class="value-item">Numaan</div>
-            <div class="value-item">Leena</div>
-            <div class="value-item">Parisa</div>
-        </div>
+<!-- ✅ Shared Header -->
+<header class="site-header">
+  <div class="header-row">
+    <div class="brand">
+      <img src="assets/logo.png" class="brand-logo">
+      <span class="brand-name">ARTIFY</span>
     </div>
-    </section>
-   
-    <div class="details-right">
-        <h3 class="detail-title">Our Story</h3>
-        <div class="story-content">
-            <span class="drop-cap">A</span>
-            <p>Artify was born from a passion to curate and highlight artists who walk artistically and feature tools...</p>
-        </div>
+
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="wishlist.html">Wishlist</a>
+      <a href="cart.html">Cart</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+
+    <div class="auth-area" id="authArea"></div>
+  </div>
+
+  <hr class="header-line">
+</header>
+
+<!-- ===== ABOUT CONTENT ===== -->
+<section class="about-wrapper">
+
+  <h1 class="about-title">ABOUT US</h1>
+  <p class="about-subtitle">Our Story · Our Passion · Your Art</p>
+
+  <!-- FOUNDERS -->
+  <div>
+    <div class="section-title">Meet The Founders</div>
+    <div class="founder-list">
+      <div>Numaan — Vision & Architecture</div>
+      <div>Leena — Creative Direction</div>
+      <div>Parisa — Artist Relations</div>
     </div>
-    <br />
-    <section class="about-contact-box">
-        <h3 class="contact-title">Contact Us</h3>
-        <div class="contact-item">
-            <h4>Email</h4>
-            <p><a href="mailto:info@artify.com">info@artify.com</a></p>
-        </div>
-    </section>
-    </main>
-    <br /><br /><br /><br /><br /><br /><br />
-    <footer>
-        <p class="footer-text">&copy; 2026 Artify. All rights reserved.</p>
-    </footer>
+
+    <div class="value-card">
+      <h4>Our Philosophy</h4>
+      <p>
+        Artify believes that art is not just decoration — it is memory, emotion,
+        and identity. Every piece here exists to be felt, not just seen.
+      </p>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <div>
+    <div class="section-title">Our Story</div>
+    <div class="story-box">
+      <span class="dropcap">A</span>
+      rtify was born from a desire to give artists a place where their work
+      could live freely — without being buried beneath algorithms, ads, or
+      mass production. We wanted a space where digital art feels personal,
+      where collectors don’t just buy images, but stories.
+
+      <br><br>
+      From independent illustrators to experimental digital painters,
+      Artify connects creators and collectors in a curated environment
+      designed to feel intimate, elegant, and timeless.
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div>
+    <div class="section-title">Contact Us</div>
+    <div class="contact-box">
+      <p>Email</p>
+      <p><a href="mailto:info@artify.com">info@artify.com</a></p>
+
+      <div class="value-card">
+        <h4>Support</h4>
+        <p>
+          Whether you're an artist or a collector, our team is here to help you
+          discover, showcase, and protect your art.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p class="footer-text">© 2026 Artify. All rights reserved.</p>
+</footer>
+
+<!-- Auth system -->
+<script src="js/headerAuth.js"></script>
+
 </body>
 </html>

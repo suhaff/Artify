@@ -4,10 +4,10 @@ const artworks = [
     artist: "Lugman",
     location: "Digital Illustration",
     price: 1500,
-    image: "assets/art/Lugman-Angel.jpg"
+    image: "assets/art/Luqman-Angel.jpg"
   },
   {
-    title: "Silent Horizon",
+    title: "Silent",
     artist: "Abaddy Ghanem",
     location: "Middle East",
     price: 950,
@@ -21,49 +21,49 @@ const artworks = [
     image: "assets/art/antoine-pouligny-2k1ANsGGMv0-unsplash.jpg"
   },
   {
-    title: "Urban Light",
+    title: "Urban",
     artist: "Christian Lue",
     location: "Germany",
     price: 980,
-    image: "assets/art/christian-lue-NozWWLzEbOE-unsplash.jpg"
+    image: "assets/art/christian-lue-NozWWLzEb0E-unsplash.jpg"
   },
   {
-    title: "Clay Echoes",
+    title: "Echoes",
     artist: "Clay Banks",
     location: "USA",
     price: 870,
     image: "assets/art/clay-banks-635ZeE2-LWE-unsplash.jpg"
   },
   {
-    title: "Neon Drift",
+    title: "Drift",
     artist: "Daniel Gomez",
     location: "Mexico",
     price: 1020,
     image: "assets/art/daniel-gomez-3HBZ7mNPh5M-unsplash.jpg"
   },
   {
-    title: "Still Silence",
+    title: "Silence",
     artist: "David Becker",
     location: "Austria",
     price: 890,
     image: "assets/art/david-becker-pdG4u2Cj4g4-unsplash.jpg"
   },
   {
-    title: "Abstract Motion",
+    title: "Abstract",
     artist: "Eduard Pretsi",
     location: "Italy",
     price: 1200,
     image: "assets/art/eduard-pretsi-Hocy-u2_T1o-unsplash.jpg"
   },
   {
-    title: "Urban Rhythm",
+    title: "Rhythm",
     artist: "Jean Carlo",
     location: "Brazil",
     price: 930,
     image: "assets/art/jean-carlo-emer-PPk5cX78qys-unsplash.jpg"
   },
   {
-    title: "Land of Lakes",
+    title: "Land",
     artist: "Unknown",
     location: "Nature",
     price: 1050,

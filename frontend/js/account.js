@@ -1,68 +1,76 @@
-const users = JSON.parse(localStorage.getItem("users")) || [];
-const current = JSON.parse(localStorage.getItem("currentUser"));
+const token = localStorage.getItem("token");
 
-// 1. NOT LOGGED IN
-if (!current) {
+if (!token) {
   window.location.href = "../login.html";
 }
 
-// 2. FIND USER
-const user = users.find(u => u.id === current.id);
+// Decode JWT payload
+const payload = JSON.parse(atob(token.split(".")[1]));
 
-// 3. USER NOT FOUND (CORRUPTED SESSION)
-if (!user) {
-  localStorage.removeItem("currentUser");
+const email = payload.sub;
+const role = payload.role;
+
+// Role-based page protection
+const path = window.location.pathname;
+
+if (path.includes("/admin/") && role !== "ADMIN") {
+  alert("Access denied");
+  window.location.href = "../index.html";
+}
+
+if (path.includes("/seller/") && role !== "SELLER") {
+  alert("Access denied");
+  window.location.href = "../index.html";
+}
+
+if (path.includes("/buyer/") && role !== "BUYER") {
+  alert("Access denied");
+  window.location.href = "../index.html";
+}
+
+/* ------------------
+   MODAL UI
+------------------ */
+
+const modal = document.getElementById("accountModal");
+
+document.getElementById("accountBtn").onclick = () => {
+  modal.classList.remove("hidden");
+
+  document.getElementById("accEmail").textContent = email;
+  document.getElementById("accRole").textContent = role;
+};
+
+document.getElementById("closeAccount").onclick = () => {
+  modal.classList.add("hidden");
+};
+
+document.getElementById("logoutBtn").onclick = () => {
+  localStorage.removeItem("token");
   window.location.href = "../login.html";
+};
+
+/* ------------------
+   SELLER REQUEST
+------------------ */
+
+const sellerBtn = document.getElementById("sellerBtn");
+
+if (role !== "BUYER") {
+  sellerBtn.style.display = "none";
 }
 
-// 4. ROLE-BASED PAGE PROTECTION
-const page = window.location.pathname;
+sellerBtn.onclick = async () => {
+  const res = await fetch("http://localhost:8080/api/users/request-seller", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  });
 
-if (page.includes("/admin/") && user.role !== "admin") {
-  alert("Access denied");
-  window.location.href = "../index.html";
-}
-
-if (page.includes("/seller/") && user.role !== "seller") {
-  alert("Access denied");
-  window.location.href = "../index.html";
-}
-
-if (page.includes("/buyer/") && user.role !== "buyer") {
-  alert("Access denied");
-  window.location.href = "../index.html";
-}
-
-// 5. MY ACCOUNT UI LOGIC
-function toggleAccount() {
-  document.getElementById("accountBox").classList.toggle("show");
-
-  document.getElementById("info").innerText =
-`${user.name}, ${user.age}
-${user.address}
-${user.email}
-${user.phone}`;
-
-  document.getElementById("role").innerText =
-    user.role === "admin"
-      ? "Admin"
-      : `User (${user.role})`;
-
-  const sellerBtn = document.getElementById("sellerBtn");
-  if (sellerBtn && user.role !== "buyer") {
-    sellerBtn.style.display = "none";
+  if (res.ok) {
+    alert("Seller request sent");
+  } else {
+    alert("Request failed");
   }
-}
-
-// 6. BUYER REQUEST SELLER
-function requestSeller() {
-  user.sellerRequest = true;
-  localStorage.setItem("users", JSON.stringify(users));
-  alert("Seller request sent to admin");
-}
-
-// 7. LOGOUT
-function logout() {
-  localStorage.removeItem("currentUser");
-  window.location.href = "../index.html";
-}
+};

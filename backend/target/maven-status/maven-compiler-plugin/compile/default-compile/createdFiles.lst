@@ -1,4 +1,8 @@
 com\artify\dto\LoginResponse.class
+com\artify\controller\CartItem.class
+com\artify\model\Order.class
+com\artify\model\OrderItem.class
+com\artify\controller\CheckoutRequest.class
 com\artify\model\User.class
 com\artify\controller\AuthController.class
 com\artify\repository\UserRepository.class
@@ -9,5 +13,6 @@ com\artify\dto\LoginRequest.class
 com\artify\security\SecurityConfig.class
 com\artify\dto\AuthResponse.class
 com\artify\dto\SignupRequest.class
+com\artify\repository\OrderRepository.class
 com\artify\controller\TestController.class
 com\artify\dto\RegisterRequest.class

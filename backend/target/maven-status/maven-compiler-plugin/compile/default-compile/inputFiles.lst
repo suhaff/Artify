@@ -1,16 +1,19 @@
 C:\Projects\Artify\backend\src\main\java\com\artify\controller\TestController.java
+C:\Projects\Artify\backend\src\main\java\com\artify\dto\CheckoutRequest.java
 C:\Projects\Artify\backend\src\main\java\com\artify\model\CartItem.java
 C:\Projects\Artify\backend\src\main\java\com\artify\repository\CartRepository.java
 C:\Projects\Artify\backend\src\main\java\com\artify\service\ProductService.java
 C:\Projects\Artify\backend\src\main\java\com\artify\controller\ProductController.java
 C:\Projects\Artify\backend\src\main\java\com\artify\ArtifyApplication.java
 C:\Projects\Artify\backend\src\main\java\com\artify\dto\AuthResponse.java
+C:\Projects\Artify\backend\src\main\java\com\artify\model\OrderItem.java
 C:\Projects\Artify\backend\src\main\java\com\artify\security\SecurityConfig.java
 C:\Projects\Artify\backend\src\main\java\com\artify\model\Wishlist.java
 C:\Projects\Artify\backend\src\main\java\com\artify\model\User.java
 C:\Projects\Artify\backend\src\main\java\com\artify\repository\UserRepository.java
 C:\Projects\Artify\backend\src\main\java\com\artify\service\CouponService.java
 C:\Projects\Artify\backend\src\main\java\com\artify\dto\LoginResponse.java
+C:\Projects\Artify\backend\src\main\java\com\artify\dto\CartItem.java
 C:\Projects\Artify\backend\src\main\java\com\artify\model\Cart.java
 C:\Projects\Artify\backend\src\main\java\com\artify\model\Order.java
 C:\Projects\Artify\backend\src\main\java\com\artify\repository\CouponRepository.java
@@ -29,6 +32,7 @@ C:\Projects\Artify\backend\src\main\java\com\artify\controller\CartController.ja
 C:\Projects\Artify\backend\src\main\java\com\artify\dto\RegisterRequest.java
 C:\Projects\Artify\backend\src\main\java\com\artify\service\OrderService.java
 C:\Projects\Artify\backend\src\main\java\com\artify\model\Product.java
+C:\Projects\Artify\backend\src\main\java\com\artify\repository\OrderItemRepository.java
 C:\Projects\Artify\backend\src\main\java\com\artify\model\Coupon.java
 C:\Projects\Artify\backend\src\main\java\com\artify\controller\AdminController.java
 C:\Projects\Artify\backend\src\main\java\com\artify\controller\WishlistController.java
