@@ -1009,3 +1009,125 @@ footer {
   font-family: Montserrat;
   font-weight: 600;
 }
+.account-btn {
+  background:#6b6bf2;
+  color:white;
+  padding:10px 18px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.account-popup {
+  position:absolute;
+  top:70px;
+  right:60px;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+  display:none;
+  width:220px;
+  z-index:1000;
+}
+
+.account-popup.show {
+  display:block;
+}
+
+.account-popup button {
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  background:#6b6bf2;
+  color:white;
+  border:none;
+  border-radius:6px;
+}
+/* Dashboard styles */
+.dashboard {
+  text-align: center;
+  margin: 80px 0 120px;
+}
+
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.card {
+  display: inline-block;
+  padding: 40px 24px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  width: 220px;
+  text-decoration: none;
+  color: #1a1a1a;
+  font-weight: 600;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+.account-btn{
+  background:#6c63ff;
+  color:white;
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.account-dropdown{
+  position:absolute;
+  right:40px;
+  top:70px;
+  background:white;
+  padding:16px;
+  width:240px;
+  border-radius:16px;
+  box-shadow:0 15px 40px rgba(0,0,0,.15);
+  display:none;
+  z-index:1000;
+}
+
+.account-dropdown.show{
+  display:block;
+}
+
+.account-dropdown hr{
+  margin:12px 0;
+  border:none;
+  border-top:1px solid #ddd;
+}
+
+.account-link{
+  display:block;
+  text-decoration:none;
+  padding:8px 0;
+  color:#333;
+  font-weight:500;
+}
+
+.account-link:hover{
+  color:#6c63ff;
+}
+
+.logout-btn{
+  width:100%;
+  background:#6c63ff;
+  color:white;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  margin-top:10px;
+}

@@ -32,7 +32,6 @@ C:\Projects\Artify\backend\src\main\java\com\artify\controller\CartController.ja
 C:\Projects\Artify\backend\src\main\java\com\artify\dto\RegisterRequest.java
 C:\Projects\Artify\backend\src\main\java\com\artify\service\OrderService.java
 C:\Projects\Artify\backend\src\main\java\com\artify\model\Product.java
-C:\Projects\Artify\backend\src\main\java\com\artify\repository\OrderItemRepository.java
 C:\Projects\Artify\backend\src\main\java\com\artify\model\Coupon.java
 C:\Projects\Artify\backend\src\main\java\com\artify\controller\AdminController.java
 C:\Projects\Artify\backend\src\main\java\com\artify\controller\WishlistController.java

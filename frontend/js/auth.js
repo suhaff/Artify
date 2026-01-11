@@ -69,7 +69,6 @@ if (loginForm) {
       email: data.email,
       role: data.role
     }));
-
     // Go back to homepage
     window.location.href = "index.html";
   });

@@ -4,43 +4,45 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "orders")
+@Table(name="orders")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String buyerName;
+    private Long userId;
+    private String name;
     private String email;
     private String address;
     private double total;
+    private String status = "PROCESSING";
 
-    @ManyToOne
-    private User user;
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="order", cascade=CascadeType.ALL)
     private List<OrderItem> items;
 
-    // --- getters & setters ---
+    // ===== GETTERS & SETTERS =====
 
-    public Long getId() { return id; }
+    public Long getId(){ return id; }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public Long getUserId(){ return userId; }
+    public void setUserId(Long userId){ this.userId = userId; }
 
-    public String getBuyerName() { return buyerName; }
-    public void setBuyerName(String buyerName) { this.buyerName = buyerName; }
+    public String getName(){ return name; }
+    public void setName(String name){ this.name = name; }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getEmail(){ return email; }
+    public void setEmail(String email){ this.email = email; }
 
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
+    public String getAddress(){ return address; }
+    public void setAddress(String address){ this.address = address; }
 
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
+    public double getTotal(){ return total; }
+    public void setTotal(double total){ this.total = total; }
 
-    public List<OrderItem> getItems() { return items; }
-    public void setItems(List<OrderItem> items) { this.items = items; }
+    public String getStatus(){ return status; }
+    public void setStatus(String status){ this.status = status; }
+
+    public List<OrderItem> getItems(){ return items; }
+    public void setItems(List<OrderItem> items){ this.items = items; }
 }

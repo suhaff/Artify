@@ -4,10 +4,7 @@ com\artify\model\Order.class
 com\artify\model\OrderItem.class
 com\artify\controller\CheckoutRequest.class
 com\artify\model\User.class
-com\artify\controller\AuthController.class
-com\artify\repository\UserRepository.class
 com\artify\security\JwtUtil.class
-com\artify\service\AuthService.class
 com\artify\ArtifyApplication.class
 com\artify\dto\LoginRequest.class
 com\artify\security\SecurityConfig.class
