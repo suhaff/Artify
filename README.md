@@ -11,9 +11,15 @@ This project was built as part of the **CAT201 Web Development Project**.
 
 | Name | Role |
 |------|------|
+<<<<<<< HEAD
 | **Numaan Suhaff** | Frontend & Backend Developer |
 | **Leena** | UI/UX Design & Documentation |
 | **Perisa** | System Analysis & Testing |
+=======
+| **Numaan Suhaff** | Backend Developer |
+| **Leena** | UI/UX Design & Databse |
+| **Perisa** | Frontend  & Testing |
+>>>>>>> 046a8e462a9a1a24be051a4c7e6a739cf58fed27
 
 ---
 

@@ -1,0 +1,255 @@
+.catalogue {
+  padding: 80px;
+}
+
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 40px;
+}
+
+.art-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.art-card img {
+  width: 100%;
+  display: block;
+}
+
+.art-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0,0,0,0.25);
+}
+.art-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.art-card:hover .art-overlay {
+  opacity: 1;
+}
+.art-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fdf6ec;
+  width: 800px;
+  display: flex;
+  padding: 30px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 24px;
+}
+.like-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  font-size: 28px;
+  border: none;
+  cursor: pointer;
+}
+
+.like-btn.liked {
+  color: red;
+}
+.modal-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.wishlist-btn {
+  border: 2px solid black;
+  background: transparent;
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+.wishlist-btn:hover {
+  background: black;
+  color: white;
+}
+
+.buy-btn {
+  background: #5b6cff;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+}
+.catalogue {
+  padding: 80px;
+}
+
+/* GRID */
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 40px;
+}
+
+/* CARD */
+.art-card {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.art-card img {
+  width: 100%;
+  display: block;
+}
+
+.art-card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+}
+
+/* OVERLAY */
+.art-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.art-card:hover .art-overlay {
+  opacity: 1;
+}
+
+/* MODAL */
+.art-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fdf6ec;
+  width: 900px;
+  display: flex;
+  padding: 30px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* MODAL IMAGE */
+.modal-image {
+  position: relative;
+  flex: 1;
+}
+
+.modal-image img {
+  width: 100%;
+}
+
+/* LIKE */
+.like-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.like-btn.liked {
+  color: red;
+}
+
+/* MODAL INFO */
+.modal-info {
+  flex: 1;
+  padding-left: 30px;
+}
+
+/* ACTION BUTTONS */
+.modal-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.wishlist-btn {
+  border: 2px solid black;
+  background: transparent;
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.wishlist-btn:hover {
+  background: black;
+  color: white;
+}
+
+.buy-btn {
+  background: #5b6cff;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  cursor: pointer;
+}
+.wishlist-btn {
+  border: 2px solid black;
+  background: white;
+  color: black;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.wishlist-btn:hover {
+  background: black;
+  color: white;
+}
+.wishlist-btn {
+  border: 2px solid black;
+  background: white;
+  color: black;
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.wishlist-btn:hover {
+  background: black;
+  color: white;
+}
