@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Artify Seller – Analytics</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family:"Montserrat",sans-serif;
+  background:#fdf3e8;
+}
+
+/* NAV */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 50px;
+  background:#fdf3e8;
+  border-bottom:1px solid rgba(0,0,0,.1);
+  position:relative;
+}
+.navbar a{
+  margin:0 15px;
+  text-decoration:none;
+  color:black;
+}
+.navbar a.active{ text-decoration:underline; }
+
+.account-btn{
+  background:#6c6cff;
+  color:white;
+  border:none;
+  padding:10px 22px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* ACCOUNT MENU */
+.account-menu{
+  position:absolute;
+  top:70px;
+  right:50px;
+  background:white;
+  padding:20px;
+  width:220px;
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+  display:none;
+}
+.account-menu.active{ display:block; }
+.account-menu a{
+  display:block;
+  text-decoration:none;
+  color:black;
+  margin-bottom:10px;
+}
+.logout{
+  width:100%;
+  background:#6c6cff;
+  color:white;
+  border:none;
+  padding:8px;
+  border-radius:12px;
+}
+
+/* PAGE */
+.page{
+  padding:50px;
+}
+.page h1{
+  font-size:40px;
+  margin-bottom:30px;
+}
+
+/* STATS */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px;
+  margin-bottom:50px;
+}
+.stat{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.stat h2{ margin:10px 0; }
+
+/* CHARTS */
+.charts{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+}
+.chart-box{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div style="font-weight:600;font-size:20px;">ARTIFY Seller</div>
+
+  <div>
+    <a href="seller-dashboard.html">Dashboard</a>
+    <a href="seller-products.html">Your Products</a>
+    <a href="seller-reviews.html">Reviews</a>
+    <a class="active" href="seller-analytics.html">Analytics</a>
+    <a href="seller-withdraw.html">Withdraw</a>
+  </div>
+
+  <button class="account-btn" id="accountBtn">My Account</button>
+
+  <div class="account-menu" id="accountMenu">
+    <a href="seller-dashboard.html">Dashboard</a>
+    <a href="seller-products.html">Products</a>
+    <a href="seller-analytics.html">Analytics</a>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<div class="page">
+  <h1>Sales Analytics</h1>
+
+  <div class="stats">
+    <div class="stat">
+      <p>Total Products</p>
+      <h2 id="totalProducts">0</h2>
+    </div>
+    <div class="stat">
+      <p>Total Orders</p>
+      <h2 id="totalOrders">0</h2>
+    </div>
+    <div class="stat">
+      <p>Total Revenue</p>
+      <h2 id="totalRevenue">RM 0</h2>
+    </div>
+    <div class="stat">
+      <p>Avg Rating</p>
+      <h2>4.6 ★</h2>
+    </div>
+  </div>
+
+  <div class="charts">
+    <div class="chart-box">
+      <h3>Monthly Revenue</h3>
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Product Sales</h3>
+      <canvas id="productChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ACCOUNT MENU */
+const accountBtn = document.getElementById("accountBtn");
+const accountMenu = document.getElementById("accountMenu");
+
+accountBtn.onclick = e => {
+  e.stopPropagation();
+  accountMenu.classList.toggle("active");
+};
+
+document.addEventListener("click", () => {
+  accountMenu.classList.remove("active");
+});
+
+function logout(){
+  localStorage.clear();
+  window.location.href = "login.html";
+}
+
+/* LOAD PRODUCTS */
+function loadProducts(){
+  return JSON.parse(localStorage.getItem("artify_products")) || [];
+}
+
+/* COMPUTE STATS */
+function computeStats(){
+  const products = loadProducts();
+
+  let totalProducts = products.length;
+  let totalOrders = 0;
+  let totalRevenue = 0;
+
+  products.forEach(p => {
+    totalOrders += p.sold;
+    totalRevenue += p.sold * p.price;
+  });
+
+  document.getElementById("totalProducts").innerText = totalProducts;
+  document.getElementById("totalOrders").innerText = totalOrders;
+  document.getElementById("totalRevenue").innerText = "RM " + totalRevenue.toFixed(2);
+
+  return { products, totalRevenue };
+}
+
+/* CHARTS */
+let revenueChart, productChart;
+
+function renderCharts(){
+  const { products, totalRevenue } = computeStats();
+
+  /* Fake monthly split based on real revenue (demo-safe) */
+  const monthly = [0,0,0,0,0,0];
+  if(totalRevenue > 0){
+    monthly[5] = totalRevenue;
+    monthly[4] = totalRevenue * 0.85;
+    monthly[3] = totalRevenue * 0.65;
+  }
+
+  if(revenueChart) revenueChart.destroy();
+  if(productChart) productChart.destroy();
+
+  revenueChart = new Chart(document.getElementById("revenueChart"),{
+    type:"line",
+    data:{
+      labels:["Jan","Feb","Mar","Apr","May","Jun"],
+      datasets:[{
+        label:"Revenue (RM)",
+        data:monthly,
+        borderColor:"#6c6cff",
+        backgroundColor:"rgba(108,108,255,.2)",
+        fill:true,
+        tension:.4
+      }]
+    }
+  });
+
+  productChart = new Chart(document.getElementById("productChart"),{
+    type:"bar",
+    data:{
+      labels:products.map(p=>p.title),
+      datasets:[{
+        label:"Sales",
+        data:products.map(p=>p.sold),
+        backgroundColor:"#6c6cff"
+      }]
+    }
+  });
+}
+
+/* AUTO REFRESH */
+function refresh(){
+  computeStats();
+  renderCharts();
+}
+
+window.addEventListener("focus", refresh);
+window.addEventListener("storage", refresh);
+
+refresh();
+</script>
+
+</body>
+</html>

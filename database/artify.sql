@@ -1,159 +1,188 @@
 /* ===============================
-   ARTIFY DATABASE
+   ARTIFY ORACLE DATABASE SCHEMA
    =============================== */
-
-DROP DATABASE IF EXISTS artify;
-CREATE DATABASE artify;
-USE artify;
 
 /* ===============================
-   USERS (BUYER / SELLER / ADMIN)
+   SEQUENCES
+   =============================== */
+CREATE SEQUENCE users_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE category_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE products_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE orders_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE order_items_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE complaints_seq START WITH 1 INCREMENT BY 1;
+
+/* ===============================
+   USERS
    =============================== */
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    full_name VARCHAR(100) NOT NULL,
-    age INT NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
+    user_id NUMBER PRIMARY KEY,
+    full_name VARCHAR2(100) NOT NULL,
+    age NUMBER,
+    email VARCHAR2(100) UNIQUE NOT NULL,
+    username VARCHAR2(50) UNIQUE NOT NULL,
+    password_hash VARCHAR2(255) NOT NULL,
+    role VARCHAR2(10)
+        CHECK (role IN ('BUYER','SELLER','ADMIN')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
 
 /* ===============================
    CATEGORY
    =============================== */
 CREATE TABLE category (
-  category_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  category_name VARCHAR(100) NOT NULL,
-  category_desc TEXT
+    category_id NUMBER PRIMARY KEY,
+    category_name VARCHAR2(100) NOT NULL,
+    category_desc CLOB
 );
 
 /* ===============================
-   PRODUCTS (ARTWORKS)
+   PRODUCTS
    =============================== */
 CREATE TABLE products (
-  product_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  title VARCHAR(150) NOT NULL,
-  description TEXT,
-  dimensions VARCHAR(100),
-  price DECIMAL(10,2) NOT NULL,
-  image_url VARCHAR(255),
-  stock INT DEFAULT 0,
-  seller_id BIGINT,
-  category_id BIGINT,
-  status ENUM('ACTIVE','DISABLED') DEFAULT 'ACTIVE',
+    product_id NUMBER PRIMARY KEY,
+    title VARCHAR2(150) NOT NULL,
+    description CLOB,
+    dimensions VARCHAR2(100),
+    price NUMBER(10,2) NOT NULL,
+    image_url VARCHAR2(255),
+    stock NUMBER DEFAULT 0,
+    sold NUMBER DEFAULT 0,
+    seller_id NUMBER,
+    category_id NUMBER,
+    status VARCHAR2(10)
+        CHECK (status IN ('ACTIVE','DISABLED')),
 
-  FOREIGN KEY (seller_id) REFERENCES users(user_id),
-  FOREIGN KEY (category_id) REFERENCES category(category_id)
-);
+    CONSTRAINT fk_products_seller
+        FOREIGN KEY (seller_id) REFERENCES users(user_id),
 
-/* ===============================
-   CART (ONE PER USER)
-   =============================== */
-CREATE TABLE cart (
-  cart_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  user_id BIGINT UNIQUE,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
-);
-
-/* ===============================
-   CART ITEMS
-   =============================== */
-CREATE TABLE cart_items (
-  cart_item_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  cart_id BIGINT,
-  product_id BIGINT,
-  quantity INT DEFAULT 1,
-
-  FOREIGN KEY (cart_id) REFERENCES cart(cart_id) ON DELETE CASCADE,
-  FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
-
-/* ===============================
-   WISHLIST (LIKE BUTTON)
-   =============================== */
-CREATE TABLE wishlist (
-  wishlist_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  user_id BIGINT,
-  product_id BIGINT,
-
-  UNIQUE (user_id, product_id),
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
-
-/* ===============================
-   COUPONS
-   =============================== */
-CREATE TABLE coupons (
-  coupon_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  code VARCHAR(50) UNIQUE NOT NULL,
-  discount_percent INT NOT NULL,
-  expiry_date DATE,
-  active BOOLEAN DEFAULT TRUE
+    CONSTRAINT fk_products_category
+        FOREIGN KEY (category_id) REFERENCES category(category_id)
 );
 
 /* ===============================
    ORDERS
    =============================== */
 CREATE TABLE orders (
-  order_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  user_id BIGINT,
-  total_amount DECIMAL(10,2),
-  coupon_code VARCHAR(50),
-  order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  status ENUM('PENDING','SHIPPED'),
+    order_id NUMBER PRIMARY KEY,
+    user_id NUMBER,
+    total_amount NUMBER(10,2),
+    coupon_code VARCHAR2(50),
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR2(15)
+        CHECK (status IN ('PENDING','SHIPPED','COMPLETED')),
 
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_orders_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 /* ===============================
    ORDER ITEMS
    =============================== */
 CREATE TABLE order_items (
-  order_item_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  order_id BIGINT,
-  product_id BIGINT,
-  price DECIMAL(10,2),
-  quantity INT,
+    order_item_id NUMBER PRIMARY KEY,
+    order_id NUMBER,
+    product_id NUMBER,
+    price NUMBER(10,2),
+    quantity NUMBER,
 
-  FOREIGN KEY (order_id) REFERENCES orders(order_id),
-  FOREIGN KEY (product_id) REFERENCES products(product_id)
+    CONSTRAINT fk_order_items_order
+        FOREIGN KEY (order_id) REFERENCES orders(order_id),
+
+    CONSTRAINT fk_order_items_product
+        FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
 /* ===============================
-   SAMPLE DATA (OPTIONAL)
+   COMPLAINTS
+   =============================== */
+CREATE TABLE complaints (
+    complaint_id NUMBER PRIMARY KEY,
+    user_email VARCHAR2(100),
+    message CLOB NOT NULL,
+    status VARCHAR2(10)
+        CHECK (status IN ('PENDING','RESOLVED')),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+/* ===============================
+   SAMPLE DATA
    =============================== */
 
-/* Admin */
-INSERT INTO users (name, email, password, role)
-VALUES ('Admin', 'admin@artify.com', 'admin123', 'ADMIN');
+/* USERS */
+INSERT INTO users VALUES (
+    users_seq.NEXTVAL,
+    'Admin',
+    30,
+    'admin@email.com',
+    'admin',
+    'admin123',
+    'ADMIN',
+    CURRENT_TIMESTAMP
+);
 
-/* Seller */
-INSERT INTO users (name, email, password, role)
-VALUES ('Art Seller', 'seller@artify.com', 'seller123', 'SELLER');
+INSERT INTO users VALUES (
+    users_seq.NEXTVAL,
+    'Art Seller',
+    28,
+    'seller@email.com',
+    'seller',
+    'seller123',
+    'SELLER',
+    CURRENT_TIMESTAMP
+);
 
-/* Buyer */
-INSERT INTO users (name, email, password, role)
-VALUES ('Buyer One', 'buyer@artify.com', 'buyer123', 'BUYER');
+INSERT INTO users VALUES (
+    users_seq.NEXTVAL,
+    'Buyer One',
+    22,
+    'buyer@email.com',
+    'buyer',
+    'buyer123',
+    'BUYER',
+    CURRENT_TIMESTAMP
+);
 
-/* Categories */
-INSERT INTO category (category_name, category_desc) VALUES
-('Painting', 'Hand-painted artworks'),
-('Digital', 'Digital illustrations'),
-('Poster', 'Poster designs');
+/* CATEGORIES */
+INSERT INTO category VALUES (
+    category_seq.NEXTVAL,
+    'Painting',
+    'Hand-painted artworks'
+);
 
-/* Products */
-INSERT INTO products
-(title, description, dimensions, price, image_url, stock, seller_id, category_id)
-VALUES
-('Starry Night', 'Famous painting', '20x30', 1000.00, 'images/starry.jpg', 10, 2, 1),
-('Digital Dreams', 'Modern digital art', '1920x1080', 300.00, 'images/digital.jpg', 20, 2, 2);
+INSERT INTO category VALUES (
+    category_seq.NEXTVAL,
+    'Digital',
+    'Digital illustrations'
+);
 
-/* Coupon */
-INSERT INTO coupons (code, discount_percent, expiry_date)
-VALUES ('ART10', 10, '2026-12-31');
-SELECT * FROM USERS;
+/* PRODUCTS */
+INSERT INTO products VALUES (
+    products_seq.NEXTVAL,
+    'Starry Night',
+    'Famous painting',
+    '20x30',
+    1000.00,
+    'images/starry.jpg',
+    10,
+    0,
+    2,
+    1,
+    'ACTIVE'
+);
+
+INSERT INTO products VALUES (
+    products_seq.NEXTVAL,
+    'Digital Dreams',
+    'Modern digital art',
+    '1920x1080',
+    300.00,
+    'images/digital.jpg',
+    20,
+    0,
+    2,
+    2,
+    'ACTIVE'
+);
+
+COMMIT;

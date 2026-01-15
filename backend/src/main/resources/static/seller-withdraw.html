@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Artify Seller – Withdraw</title>
+
+<style>
+body{
+  margin:0;
+  font-family:"Montserrat",sans-serif;
+  background:#fdf3e8;
+}
+
+/* NAV */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 50px;
+  background:#fdf3e8;
+  border-bottom:1px solid rgba(0,0,0,.1);
+  position:relative;
+}
+.navbar a{
+  margin:0 15px;
+  text-decoration:none;
+  color:black;
+}
+.navbar a.active{
+  text-decoration:underline;
+}
+.account-btn{
+  background:#6c6cff;
+  color:white;
+  border:none;
+  padding:10px 22px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* ACCOUNT MENU */
+.account-menu{
+  position:absolute;
+  top:70px;
+  right:50px;
+  background:white;
+  padding:20px;
+  width:220px;
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+  display:none;
+}
+.account-menu.active{ display:block; }
+.account-menu a{
+  display:block;
+  text-decoration:none;
+  color:black;
+  margin-bottom:10px;
+}
+.logout{
+  width:100%;
+  background:#6c6cff;
+  color:white;
+  border:none;
+  padding:8px;
+  border-radius:12px;
+}
+
+/* PAGE */
+.page{
+  padding:60px;
+}
+.page h1{
+  font-size:40px;
+}
+
+/* BALANCE */
+.balance{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  width:320px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  margin:30px 0;
+}
+.balance h2{
+  font-size:40px;
+  margin:10px 0;
+}
+
+/* WITHDRAW BOX */
+.withdraw-box{
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  max-width:500px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.withdraw-box input{
+  width:100%;
+  padding:15px;
+  margin:15px 0;
+  border-radius:15px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+.withdraw-btn{
+  background:black;
+  color:white;
+  border:none;
+  padding:15px 30px;
+  border-radius:25px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+/* HISTORY */
+.history{
+  margin-top:50px;
+}
+.history-card{
+  background:white;
+  padding:20px 30px;
+  border-radius:20px;
+  box-shadow:0 10px 20px rgba(0,0,0,.06);
+  margin-bottom:15px;
+  display:flex;
+  justify-content:space-between;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div style="font-size:22px;font-weight:600;">ARTIFY Seller</div>
+  <div>
+    <a href="seller-dashboard.html">Dashboard</a>
+    <a href="seller-products.html">Your Products</a>
+    <a href="seller-reviews.html">Reviews</a>
+    <a href="seller-analytics.html">Analytics</a>
+    <a class="active" href="seller-withdraw.html">Withdraw</a>
+  </div>
+  <button class="account-btn" id="accountBtn">My Account</button>
+
+  <div class="account-menu" id="accountMenu">
+    <a href="seller-dashboard.html">Dashboard</a>
+    <a href="seller-products.html">Products</a>
+    <a href="seller-analytics.html">Analytics</a>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<div class="page">
+  <h1>Withdraw Earnings</h1>
+
+  <div class="balance">
+    <p>Available Balance</p>
+    <h2 id="balance">RM 0</h2>
+  </div>
+
+  <div class="withdraw-box">
+    <h3>Request Withdrawal</h3>
+    <input type="number" id="amount" placeholder="Enter amount">
+    <input type="text" id="method" placeholder="Bank / Wallet">
+    <button class="withdraw-btn" onclick="withdraw()">Request Withdrawal</button>
+  </div>
+
+  <div class="history">
+    <h2>Withdrawal History</h2>
+    <div id="history"></div>
+  </div>
+</div>
+
+<script>
+/* ACCOUNT MENU */
+const accountBtn = document.getElementById("accountBtn");
+const accountMenu = document.getElementById("accountMenu");
+
+accountBtn.onclick = e => {
+  e.stopPropagation();
+  accountMenu.classList.toggle("active");
+};
+document.addEventListener("click", () => accountMenu.classList.remove("active"));
+
+function logout(){
+  localStorage.clear();
+  window.location.href = "login.html";
+}
+
+/* DATA HELPERS */
+function loadProducts(){
+  return JSON.parse(localStorage.getItem("artify_products")) || [];
+}
+function loadWithdrawals(){
+  return JSON.parse(localStorage.getItem("artify_withdrawals")) || [];
+}
+function saveWithdrawals(w){
+  localStorage.setItem("artify_withdrawals", JSON.stringify(w));
+}
+
+/* BALANCE CALCULATION */
+function calculateBalance(){
+  const products = loadProducts();
+  const withdrawals = loadWithdrawals();
+
+  let revenue = 0;
+  products.forEach(p => revenue += p.sold * p.price);
+
+  let withdrawn = 0;
+  withdrawals.forEach(w => withdrawn += w.amount);
+
+  return revenue - withdrawn;
+}
+
+/* RENDER */
+function render(){
+  const balance = calculateBalance();
+  document.getElementById("balance").innerText = "RM " + balance.toFixed(2);
+
+  const historyBox = document.getElementById("history");
+  historyBox.innerHTML = "";
+
+  const withdrawals = loadWithdrawals();
+  withdrawals.forEach(w => {
+    historyBox.innerHTML += `
+      <div class="history-card">
+        <span>${w.method}</span>
+        <span>RM ${w.amount} — ${w.date}</span>
+      </div>
+    `;
+  });
+}
+
+/* WITHDRAW */
+function withdraw(){
+  const amt = Number(document.getElementById("amount").value);
+  const method = document.getElementById("method").value.trim();
+  const balance = calculateBalance();
+
+  if(!amt || amt <= 0){
+    alert("Enter a valid amount");
+    return;
+  }
+  if(amt > balance){
+    alert("Insufficient balance");
+    return;
+  }
+  if(!method){
+    alert("Enter bank or wallet");
+    return;
+  }
+
+  const withdrawals = loadWithdrawals();
+  withdrawals.unshift({
+    amount: amt,
+    method,
+    date: new Date().toLocaleDateString()
+  });
+
+  saveWithdrawals(withdrawals);
+  render();
+
+  document.getElementById("amount").value = "";
+  document.getElementById("method").value = "";
+
+  alert("Withdrawal requested successfully");
+}
+
+/* AUTO SYNC */
+window.addEventListener("focus", render);
+window.addEventListener("storage", render);
+
+render();
+</script>
+
+</body>
+</html>

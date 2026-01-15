@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin | Complaints</title>
+<link rel="stylesheet" href="css/base.css">
+
+<style>
+.container{
+  max-width:1200px;
+  margin:100px auto;
+}
+table{
+  width:100%;
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 20px 50px rgba(0,0,0,.1);
+}
+th,td{
+  padding:16px;
+  border-bottom:1px solid #eee;
+}
+th{
+  background:#f3f3ff;
+}
+.badge{
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:13px;
+}
+.pending{ background:#ffe6e6; }
+.resolved{ background:#e6ffec; }
+button{
+  padding:8px 14px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+.resolve{
+  background:#6c6cff;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>User Complaints</h2>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>User</th>
+<th>Message</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="rows">
+<tr><td colspan="5">Loading...</td></tr>
+</tbody>
+</table>
+</div>
+
+<script>
+async function load() {
+  const res = await fetch("http://localhost:8080/api/complaints", {
+    headers:{
+      "Authorization":"Bearer "+localStorage.getItem("token")
+    }
+  });
+  const data = await res.json();
+
+  const box = document.getElementById("rows");
+  box.innerHTML = "";
+
+  if (data.length === 0) {
+    box.innerHTML = `<tr><td colspan="5">No complaints</td></tr>`;
+    return;
+  }
+
+  data.forEach(c=>{
+    box.innerHTML += `
+      <tr>
+        <td>${c.id}</td>
+        <td>${c.userEmail}</td>
+        <td>${c.message}</td>
+        <td><span class="badge ${c.status==='PENDING'?'pending':'resolved'}">${c.status}</span></td>
+        <td>
+          ${c.status==='PENDING'
+            ? `<button class="resolve" onclick="resolve(${c.id})">Resolve</button>`
+            : `—`
+          }
+        </td>
+      </tr>
+    `;
+  });
+}
+
+async function resolve(id){
+  await fetch(`http://localhost:8080/api/complaints/${id}/resolve`,{
+    method:"PUT",
+    headers:{
+      "Authorization":"Bearer "+localStorage.getItem("token")
+    }
+  });
+  load();
+}
+
+load();
+</script>
+
+</body>
+</html>

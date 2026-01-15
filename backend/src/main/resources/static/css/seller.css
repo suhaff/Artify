@@ -1,0 +1,217 @@
+.seller {
+  padding: 80px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.upload-form {
+  background: #fdf6ec;
+  padding: 30px;
+}
+
+.upload-form input,
+.upload-form button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+.upload-form button {
+  background: black;
+  color: white;
+  border: none;
+}
+body {
+  margin:0;
+  font-family: 'Montserrat', sans-serif;
+  background:#f9efe5;
+}
+
+.site-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  border-bottom:1px solid #ddd;
+}
+
+.logo {
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+nav a {
+  margin:0 15px;
+  text-decoration:none;
+  color:#333;
+  font-weight:500;
+}
+
+nav a.active {
+  border-bottom:2px solid black;
+}
+
+#accountBtn {
+  background:#6b6cff;
+  color:white;
+  padding:10px 18px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.seller-hero {
+  text-align:center;
+  padding:80px;
+}
+
+.dashboard-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  padding:40px;
+}
+
+.stat-box {
+  background:white;
+  padding:40px;
+  border-radius:16px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.page {
+  padding:60px;
+}
+
+.add-btn, .withdraw-btn {
+  padding:14px 24px;
+  background:black;
+  color:white;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.product-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  margin-top:30px;
+}
+
+.product-card {
+  background:white;
+  padding:20px;
+  border-radius:16px;
+}
+
+.review-box, .analytics-box {
+  background:white;
+  padding:30px;
+  border-radius:14px;
+  margin-top:20px;
+}
+.site-header {
+  background: #f8efe6;
+  border-bottom: 1px solid #e0d6cc;
+  padding: 18px 40px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 22px;
+  letter-spacing: 4px;
+}
+
+.nav-links a {
+  margin: 0 20px;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.nav-links a.active {
+  border-bottom: 2px solid black;
+  padding-bottom: 4px;
+}
+
+.seller-dashboard {
+  padding: 80px 120px;
+}
+
+.welcome-card {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.welcome-card h1 {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.seller-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.seller-tile {
+  background: white;
+  border-radius: 20px;
+  padding: 50px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.seller-tile:hover {
+  transform: translateY(-6px);
+}
+
+.seller-tile h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.seller-nav{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:18px 50px;
+ background:#fdf3e8;
+ border-bottom:1px solid rgba(0,0,0,.1);
+}
+
+.seller-nav a{
+ margin:0 15px;
+ text-decoration:none;
+ color:black;
+ font-weight:500;
+}
+
+.seller-nav a.active{
+ text-decoration:underline;
+}
+
+.seller-btn{
+ background:#6c6cff;
+ color:white;
+ border:none;
+ padding:10px 22px;
+ border-radius:20px;
+ cursor:pointer;
+}
+
+.card{
+ background:white;
+ padding:30px;
+ border-radius:20px;
+ text-align:center;
+ box-shadow:0 10px 30px rgba(0,0,0,.06);
+}

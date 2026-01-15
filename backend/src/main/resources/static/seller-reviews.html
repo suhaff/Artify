@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Artify | Seller Reviews</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;800&family=Montserrat:wght@300..900&display=swap" rel="stylesheet">
+
+  <!-- Base Styles -->
+  <link rel="stylesheet" href="css/base.css">
+
+  <style>
+    .reviews-container {
+      max-width: 1100px;
+      margin: 120px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 40px 80px rgba(0,0,0,.15);
+    }
+
+    .reviews-container h2 {
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #f5f6ff;
+    }
+
+    th, td {
+      padding: 14px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      font-weight: 600;
+    }
+
+    .rating {
+      color: #ffb703;
+      font-size: 18px;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px;
+      color: #777;
+    }
+
+    .badge {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      background: #eee;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="header-row">
+    <div class="brand">
+      <img src="assets/logo.png" class="brand-logo">
+      <span class="brand-name">ARTIFY</span>
+    </div>
+
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="seller-dashboard.html">Dashboard</a>
+      <a href="seller-products.html">My Products</a>
+      <a href="seller-reviews.html" class="active">Reviews</a>
+      <a href="seller-analytics.html">Analytics</a>
+      <a href="seller-withdraw.html">Withdraw</a>
+    </nav>
+
+    <div class="auth-area" id="authArea"></div>
+  </div>
+  <hr class="header-line">
+</header>
+
+<!-- ================= REVIEWS ================= -->
+<div class="reviews-container">
+  <h2>Customer Reviews</h2>
+
+  <table id="reviewsTable" style="display:none;">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Buyer</th>
+        <th>Rating</th>
+        <th>Review</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody id="reviewsBody"></tbody>
+  </table>
+
+  <div class="empty" id="emptyState">
+    No reviews yet.<br>
+    Once buyers review your products, they will appear here.
+  </div>
+</div>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="js/headerAuth.js"></script>
+
+<script>
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Please login as seller");
+    window.location.href = "login.html";
+  }
+
+  // Decode JWT to get seller ID
+  const payload = JSON.parse(atob(token.split(".")[1]));
+  const sellerId = payload.userId;
+
+  fetch(`http://localhost:8080/api/reviews/seller/${sellerId}`, {
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  })
+  .then(res => res.ok ? res.json() : [])
+  .then(data => {
+    if (!data || data.length === 0) return;
+
+    document.getElementById("emptyState").style.display = "none";
+    document.getElementById("reviewsTable").style.display = "table";
+
+    let html = "";
+
+    data.forEach(r => {
+      html += `
+        <tr>
+          <td>${r.productTitle || "—"}</td>
+          <td>${r.buyerEmail || "—"}</td>
+          <td class="rating">${"★".repeat(r.rating || 0)}</td>
+          <td>${r.comment || ""}</td>
+          <td>${r.createdAt ? new Date(r.createdAt).toLocaleDateString() : ""}</td>
+        </tr>
+      `;
+    });
+
+    document.getElementById("reviewsBody").innerHTML = html;
+  })
+  .catch(() => {
+    console.log("Reviews API not ready yet");
+  });
+</script>
+
+</body>
+</html>

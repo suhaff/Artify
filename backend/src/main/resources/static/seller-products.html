@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Artify | Seller Products</title>
+
+<link rel="stylesheet" href="css/base.css">
+
+<style>
+body {
+  margin: 0;
+  background: #fdf3e8;
+  font-family: Montserrat, sans-serif;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+/* ===== GRID ===== */
+.container {
+  padding: 60px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 40px;
+}
+
+/* ===== CARD (MATCH BUYER STYLE) ===== */
+.card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,.08);
+}
+
+.card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 18px;
+}
+
+.card-body h3 {
+  margin: 0 0 8px;
+}
+
+.meta {
+  font-size: 14px;
+  opacity: .7;
+  margin-bottom: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.delete-btn {
+  flex: 1;
+  background: #eee;
+  border: none;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* ===== ADD BUTTON ===== */
+.add-btn {
+  background: black;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* ===== MODAL ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-box {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 340px;
+}
+
+.modal-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <h2>ARTIFY Seller</h2>
+  <button class="add-btn" onclick="openModal()">+ Add Product</button>
+</div>
+
+<div class="container">
+  <div class="grid" id="grid"></div>
+</div>
+
+<!-- ADD MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h3>Add Artwork</h3>
+    <input id="title" placeholder="Artwork title">
+    <input id="price" type="number" placeholder="Price">
+    <input id="stock" type="number" placeholder="Stock">
+    <input id="image" type="file" accept="image/*">
+    <button class="add-btn" onclick="addProduct()">Add</button>
+  </div>
+</div>
+
+<script>
+function loadProducts() {
+  return JSON.parse(localStorage.getItem("artify_products")) || [];
+}
+
+function saveProducts(products) {
+  localStorage.setItem("artify_products", JSON.stringify(products));
+}
+
+function openModal() {
+  document.getElementById("modal").classList.add("active");
+}
+
+document.getElementById("modal").onclick = e => {
+  if (e.target.id === "modal") e.target.classList.remove("active");
+};
+
+function addProduct() {
+  const title = document.getElementById("title").value;
+  const price = document.getElementById("price").value;
+  const stock = parseInt(document.getElementById("stock").value);
+  const file = document.getElementById("image").files[0];
+
+  if (!title || !price || !stock || !file) {
+    alert("Fill all fields");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const products = loadProducts();
+
+    products.push({
+      id: Date.now(),
+      title,
+      price,
+      stock,
+      sold: 0,
+      image: reader.result
+    });
+
+    saveProducts(products);
+    render();
+
+    document.getElementById("modal").classList.remove("active");
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function removeProduct(id) {
+  let products = loadProducts();
+  products = products.filter(p => p.id !== id);
+  saveProducts(products);
+  render();
+}
+
+function render() {
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  const products = loadProducts();
+
+  products.forEach(p => {
+    grid.innerHTML += `
+      <div class="card">
+        <img src="${p.image}">
+        <div class="card-body">
+          <h3>${p.title}</h3>
+          <div class="meta">
+            RM ${p.price}<br>
+            Sold: ${p.sold} | Left: ${p.stock}
+          </div>
+          <div class="actions">
+            <button class="delete-btn" onclick="removeProduct(${p.id})">Delete</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+/* 🔥 AUTO-SYNC FIX */
+window.addEventListener("focus", render);
+window.addEventListener("storage", render);
+
+/* Initial load */
+render();
+</script>
+
+
+</body>
+</html>

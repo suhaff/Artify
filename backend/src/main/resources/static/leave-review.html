@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Leave Review | Artify</title>
+
+<style>
+.box{
+  max-width:500px;
+  margin:100px auto;
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  box-shadow:0 15px 30px rgba(0,0,0,.1);
+}
+textarea, select, button{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border-radius:12px;
+}
+button{
+  background:#6c6cff;
+  color:white;
+  border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Leave Review</h2>
+  <p id="product"></p>
+
+  <select id="rating">
+    <option value="">Rating</option>
+    <option>5</option>
+    <option>4</option>
+    <option>3</option>
+    <option>2</option>
+    <option>1</option>
+  </select>
+
+  <textarea id="comment" placeholder="Write your review"></textarea>
+
+  <button onclick="submitReview()">Submit Review</button>
+</div>
+
+<script>
+const product = localStorage.getItem("review_product");
+document.getElementById("product").innerText = product;
+
+function submitReview(){
+  const rating = document.getElementById("rating").value;
+  const comment = document.getElementById("comment").value;
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
+  if(!rating || !comment){
+    alert("Fill all fields");
+    return;
+  }
+
+  const reviews = JSON.parse(localStorage.getItem("artify_reviews")) || [];
+
+  reviews.unshift({
+    product,
+    rating,
+    comment,
+    buyer: user.email,
+    date: new Date().toLocaleDateString()
+  });
+
+  localStorage.setItem("artify_reviews", JSON.stringify(reviews));
+
+  alert("Review submitted");
+  window.location.href = "my-orders.html";
+}
+</script>
+
+</body>
+</html>

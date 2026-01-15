@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Artify Seller Dashboard</title>
+
+<link rel="stylesheet" href="css/base.css">
+
+<style>
+body {
+  margin: 0;
+  background: #fdf3e8;
+  font-family: Montserrat, sans-serif;
+}
+
+/* ========== NAVBAR ========== */
+.seller-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 50px;
+  background: #fdf3e8;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.seller-nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+.seller-nav a.active {
+  text-decoration: underline;
+}
+
+.seller-btn {
+  background: #6c6cff;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ========== ACCOUNT DROPDOWN ========== */
+.account-menu {
+  position: absolute;
+  top: 75px;
+  right: 50px;
+  width: 260px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  padding: 20px;
+  display: none;
+  z-index: 10;
+}
+
+.account-menu.active {
+  display: block;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.account-header {
+  margin-bottom: 15px;
+}
+
+.account-header strong {
+  display: block;
+  font-size: 14px;
+}
+
+.account-header span {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.account-menu a {
+  display: block;
+  padding: 10px 0;
+  color: black;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.account-menu a:hover {
+  opacity: 0.7;
+}
+
+.logout-btn {
+  margin-top: 15px;
+  width: 100%;
+  background: #6c6cff;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+/* ========== HERO ========== */
+.hero {
+  text-align: center;
+  padding: 60px 20px 30px;
+}
+
+.hero h1 {
+  margin-bottom: 10px;
+}
+
+.hero p {
+  opacity: 0.7;
+}
+
+/* ========== STATS ========== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  padding: 40px 60px 80px;
+}
+
+.stat-card {
+  background: white;
+  padding: 35px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,.1);
+}
+
+.stat-card h3 {
+  margin-bottom: 10px;
+  opacity: 0.6;
+}
+
+.stat-card h1 {
+  font-size: 36px;
+}
+
+/* ========== LOADING ========== */
+.loading {
+  text-align: center;
+  font-size: 18px;
+  padding: 60px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="seller-nav">
+  <div style="font-size:22px;font-weight:600;">ARTIFY Seller</div>
+
+  <div>
+    <a href="seller-dashboard.html" class="active">Dashboard</a>
+    <a href="seller-products.html">Your Products</a>
+    <a href="seller-reviews.html">Reviews</a>
+    <a href="seller-analytics.html">Analytics</a>
+    <a href="seller-withdraw.html">Withdraw</a>
+  </div>
+
+  <button class="seller-btn" id="accountBtn">My Account</button>
+
+  <!-- ACCOUNT DROPDOWN -->
+  <div class="account-menu" id="accountMenu">
+    <div class="account-header">
+      <strong id="userEmail">user@email.com</strong>
+      <span>Role: SELLER</span>
+    </div>
+
+    <a href="seller-dashboard.html">Dashboard</a>
+    <a href="seller-products.html">My Products</a>
+    <a href="seller-reviews.html">Reviews</a>
+    <a href="seller-analytics.html">Analytics</a>
+    <a href="seller-withdraw.html">Withdrawals</a>
+
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Welcome to Your Art Shop</h1>
+  <p>Manage your products, track sales and grow your brand.</p>
+</div>
+
+<div id="loading" class="loading">Loading dashboard...</div>
+
+<div class="stats-grid" id="stats" style="display:none;">
+  <div class="stat-card" onclick="go('seller-products.html')">
+    <h3>Products</h3>
+    <h1 id="prodCount">0</h1>
+  </div>
+
+  <div class="stat-card" onclick="go('seller-analytics.html')">
+    <h3>Orders</h3>
+    <h1 id="orderCount">0</h1>
+  </div>
+
+  <div class="stat-card" onclick="go('seller-analytics.html')">
+    <h3>Revenue</h3>
+    <h1 id="revenue">$0</h1>
+  </div>
+
+  <div class="stat-card" onclick="go('seller-reviews.html')">
+    <h3>Reviews</h3>
+    <h1 id="reviewCount">0</h1>
+  </div>
+</div>
+
+<script>
+function go(page) {
+  window.location.href = page;
+}
+
+/* ===== ACCOUNT MENU ===== */
+const accountBtn = document.getElementById("accountBtn");
+const accountMenu = document.getElementById("accountMenu");
+
+accountBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  accountMenu.classList.toggle("active");
+});
+
+document.addEventListener("click", () => {
+  accountMenu.classList.remove("active");
+});
+
+/* ===== AUTH ===== */
+const token = localStorage.getItem("token");
+
+if (!token) {
+  alert("Please login first");
+  window.location.href = "login.html";
+}
+
+// Decode JWT safely
+const payload = JSON.parse(atob(token.split(".")[1]));
+document.getElementById("userEmail").innerText = payload.sub;
+
+/* ===== FETCH REAL STATS ===== */
+fetch("http://localhost:8080/api/users/seller/stats", {
+  headers: {
+    "Authorization": "Bearer " + token
+  }
+})
+.then(res => {
+  if (!res.ok) throw new Error();
+  return res.json();
+})
+.then(data => {
+  document.getElementById("prodCount").innerText = data.products;
+  document.getElementById("orderCount").innerText = data.orders;
+  document.getElementById("revenue").innerText = "RM " + data.revenue.toFixed(2);
+  document.getElementById("reviewCount").innerText = data.reviews;
+
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("stats").style.display = "grid";
+})
+.catch(() => {
+  alert("Seller access required");
+  window.location.href = "index.html";
+});
+
+function logout() {
+  localStorage.clear();
+  window.location.href = "login.html";
+}
+</script>
+
+
+</body>
+</html>
